@@ -7,12 +7,9 @@ import org.springframework.stereotype.Service;
 import com.proj3.warehouses.models.User;
 import com.proj3.warehouses.repositories.UserRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.Map;
 import java.util.Objects;
 
-@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 	

@@ -15,6 +15,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 @NamedQuery(name = "User.findByEmailId", query = "select u from User u where u.email =: email")
 
+
 @Entity
 @DynamicUpdate
 @DynamicInsert

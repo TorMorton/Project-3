@@ -1,12 +1,56 @@
-table {
-    border-bottom: 3px #444;
-    border-radius: 10px;
+main {
+    margin: 0px 24px;
 }
 
-th {
-    padding-right: 10px;
+#button-div {
+    display: inline-block;
+    padding: 6px;
 }
 
-tbody {
-    background-color:  #444;
+.productForm div {
+   padding:6px; 
+}
+
+.productForm div label {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+
+.productForm span {
+    color: red;
+    font-weight: bold;
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    width: fit-content;
+    margin-bottom: 24px;
+}
+
+.table {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.table thead {
+    font-size: 24px;
+}
+
+/* .table #table-tools {
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+} */
+
+.table #table-tools button {
+    margin-left: 12px;
+}
+
+#delete-modal .modal-body p {
+    display: block;
+    text-align: center;
 }
