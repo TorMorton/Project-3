@@ -33,12 +33,12 @@ public class UserServiceImpl implements UserService {
 				User user = userRepository.findByEmailId(requestMap.get("email"));
 				if (Objects.isNull(user)) {
 					userRepository.save(getUserFromMap(requestMap));  // persist data into database
-					return new ResponseEntity<String>("{\"message\":\"Uh-oh try again\"}", HttpStatus.CREATED);
+					return new ResponseEntity<String>("{\"message\":\"New user has been created\"}", HttpStatus.CREATED);
 					} else {
-						return new ResponseEntity<String>("{\"message\":\"Uh-oh try again\"}", HttpStatus.BAD_REQUEST);
+						return new ResponseEntity<String>("{\"message\":\"Bad request\"}", HttpStatus.BAD_REQUEST);
 					}
 				} else {
-					return new ResponseEntity<String>("{\"message\":\"Uh-oh try again\"}", HttpStatus.BAD_REQUEST);
+					return new ResponseEntity<String>("{\"message\":\"Bad request\"}", HttpStatus.BAD_REQUEST);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();

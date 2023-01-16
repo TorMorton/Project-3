@@ -9,14 +9,18 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.skillstorm.training</groupId>
-	<artifactId>nothing-here-1</artifactId>
+	<artifactId>nothing-here-4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nothing-here-1</name>
+	<name>nothing-here-4</name>
 	<description>Demo</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
