@@ -1,0 +1,12 @@
+table {
+    border-bottom: 3px #444;
+    border-radius: 10px;
+}
+
+th {
+    padding-right: 10px;
+}
+
+tbody {
+    background-color:  #444;
+}

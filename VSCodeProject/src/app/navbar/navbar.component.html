@@ -1,0 +1,19 @@
+<div>
+
+	<ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-left">
+			<a class="navbar-brand"><img src="../assets/Images/logo4.png" alt="GameRigs Computing LLC Logo" width="300" height="300"></a>
+	<li [ngbNavItem]="1">
+		<a ngbNavLink routerLink="/home">Home</a>
+	</li>
+
+	<li ngbDropdown class="nav-item">
+		<a href (click)="false" class="nav-link" ngbDropdownToggle>Warehouses</a>
+		<div ngbDropdownMenu>
+			<button ngbDropdownItem routerLink="/warehouses">GPU Warehouse</button>
+			<button ngbDropdownItem>CPU Warehouse</button>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<router-outlet></router-outlet>
