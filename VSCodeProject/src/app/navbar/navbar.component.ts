@@ -12,9 +12,11 @@ export class NavbarComponent {
 
   constructor(private crudService: CRUDService) {}
 
-  getGPUWarehouse(warehouseURL: string) {
+  getWarehouse(warehouseURL: string) {
     this.crudService.warehouseURL = warehouseURL;
     this.crudService.getAll;
   }
+
+  
 
 }
