@@ -1,4 +1,4 @@
-<main onload="displayAll()">
+<main>
 
   <!-- Edit Modal -->
   <div class="modal fade" id="edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -193,91 +193,97 @@
             </div>
         </div>
 
-        <!-- Delete All -->
-        <!-- Button trigger deleteAll modal -->
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAll-modal">
-            Clear Warehouse
-        </button>
-
     </section>  
 
 
     <!-- ----------------- Tables ------------------ -->
-    <div class="button-div">
-        <ng-container *ngIf="inventory && !tempInventory">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Manufacturer</th>
-                        <th scope="col">Model</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Tools</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor="let item of inventory">
+    <div class="container-fluid">
+        <div class="button-div">
+            <ng-container *ngIf="inventory && !tempInventory">
+                <table class="table rounded">
+                    <thead>
                         <tr>
-                            <th scope="row"> {{ item.id }} </th>
-                            <td> {{ item.manufacturer }}</td>
-                            <td> {{ item.model }} </td>
-                            <td> {{ item.cost }} </td>
-                            <td id="table-tools"> 
-                                <!-- Button trigger edit modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
-                                (click)="findById(item.id)">
-                                    Edit
-                                </button>
-                                <!-- Button trigger delete modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" 
-                                (click)="findById(item.id)">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr> 
-                     </ng-container>
-                </tbody>
-              </table>
-
-        </ng-container>
+                            <th scope="col">#</th>
+                            <th scope="col">Manufacturer</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Cost</th>
+                            <th scope="col">Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of inventory">
+                            <tr>
+                                <th scope="row"> {{ item.id }} </th>
+                                <td> {{ item.manufacturer }}</td>
+                                <td> {{ item.model }} </td>
+                                <td> {{ item.cost }} </td>
+                                <td id="table-tools"> 
+                                    <!-- Button trigger edit modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
+                                    (click)="findById(item.id)">
+                                        Edit
+                                    </button>
+                                    <!-- Button trigger delete modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" 
+                                    (click)="findById(item.id)">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr> 
+                         </ng-container>
+                    </tbody>
+                  </table>
+    
+            </ng-container>
+        </div>
     </div>
 
-    <div>
-        <ng-container *ngIf="tempInventory">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Manufacturer</th>
-                        <th scope="col">Model</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Tools</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor="let item of tempInventory">
+    <div class="container-fluid">
+        <div>
+            <ng-container *ngIf="tempInventory">
+                <table class="table rounded">
+                    <thead>
                         <tr>
-                            <th scope="row"> {{ item.id }} </th>
-                            <td> {{ item.manufacturer }}</td>
-                            <td> {{ item.model }} </td>
-                            <td> {{ item.cost }} </td>
-                            <td id="table-tools"> 
-                                <!-- Button trigger edit modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
-                                (click)="findById(item.id)">
-                                    Edit
-                                </button>
-                                <!-- Button trigger deleteById modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" 
-                                (click)="findById(item.id)">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr> 
-                     </ng-container>
-                </tbody>
-              </table>
-
-        </ng-container>
+                            <th scope="col">#</th>
+                            <th scope="col">Manufacturer</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Cost</th>
+                            <th scope="col">Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of tempInventory">
+                            <tr>
+                                <th scope="row"> {{ item.id }} </th>
+                                <td> {{ item.manufacturer }}</td>
+                                <td> {{ item.model }} </td>
+                                <td> {{ item.cost }} </td>
+                                <td id="table-tools"> 
+                                    <!-- Button trigger edit modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
+                                    (click)="findById(item.id)">
+                                        Edit
+                                    </button>
+                                    <!-- Button trigger deleteById modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" 
+                                    (click)="findById(item.id)">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr> 
+                         </ng-container>
+                    </tbody>
+                  </table>
+    
+            </ng-container>
+        </div>
     </div>
+
+    <!-- Delete All -->
+        <!-- Button trigger deleteAll modal -->
+        <div class="container-fluid">
+            <button type="button" class="btn btn-danger float-end" data-bs-toggle="modal" data-bs-target="#deleteAll-modal">
+                Clear Warehouse
+            </button>
+        </div>
 </main>

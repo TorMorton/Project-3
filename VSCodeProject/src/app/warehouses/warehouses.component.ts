@@ -58,6 +58,10 @@ export class WarehousesComponent{
 
 
   // methods
+  onInIt() {
+    this.displayAll();
+  }
+
   displayAll() {
     this.crudService.getAll().subscribe(data => {
       console.log(data);

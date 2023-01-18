@@ -1,16 +1,55 @@
 <main>
 
-    <h1>GameRigs Computing LLC</h1>
-        <h2>Warehouses</h2>
-    <ul>
-        <li>Warehouse 1 - Graphics Processing Units</li>
-            <ul>
-                <li>Location: Taiwan</li>
-            </ul>
-        <li> Warehouse 2 - Power Supply Units </li>
-            <ul>
-                <li>Location: China</li>
-            </ul>
-</ul>
+    <h2> Warehouses </h2>
+
+    <!-- <section class="warehouse-cards"> -->
+
+        <div class="container-fluid bg-black rounded text-white" style="--bs-bg-opacity: .8; margin-bottom: 12px;">
+            <div class="row gx-3 " id="card">
+                <div class="col-sm-4">
+                    <div class="p-3"><img src="../../assets/Images/warehouse-1.jpg" class="rounded img-fluid" alt="Aerial view of the gpu warehouse"></div>
+                </div>
+                <div class="col-sm-8" id="card-body">
+                  <div class="p-3">
+                      <h5 class="card-title">GPU Warehouse</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <div class="float-end"><button type="button" class="btn btn-dark btn-outline-light btn-sm" routerLink="/warehouses" (click)="getWarehouse(gpuWarehouseURL)">GPU Warehouse</button></div>
+                  </div>
+                </div>
+              </div>              
+        </div>
+
+        <div class="container-fluid bg-black rounded text-white" style="--bs-bg-opacity: .8; margin-bottom: 12px;">
+            <div class="row gx-3" id="card">
+                <div class="col-sm-4">
+                    <div class="p-3"><img src="../../assets/Images/warehouse-2.jpg" class="rounded img-fluid" alt="Aerial view of the gpu warehouse"></div>
+                </div>
+                <div class="col-sm-8" id="card-body">
+                  <div class="p-3">
+                      <h5 class="card-title">CPU Warehouse</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <div class="float-end"><button type="button" class="btn btn-dark btn-outline-light btn-sm" routerLink="/warehouses" (click)="getWarehouse(gpuWarehouseURL)">GPU Warehouse</button></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <div class="container-fluid bg-black rounded text-white" style="--bs-bg-opacity: .8; margin-bottom: 12px;">
+            <div class="row gx-3 " id="card">
+                <div class="col-sm-4">
+                    <div class="p-3"><img src="../../assets/Images/warehouse-3.jpg" class="rounded img-fluid" alt="Aerial view of the gpu warehouse"></div>
+                </div>
+                <div class="col-sm-8" id="card-body">
+                  <div class="p-3">
+                      <h5 class="card-title">PSU Warehouse</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <div class="float-end"><button type="button" class="btn btn-dark btn-outline-light btn-sm" routerLink="/warehouses" (click)="getWarehouse(gpuWarehouseURL)">GPU Warehouse</button></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+    <!-- </section> -->
+
 
 </main> 
