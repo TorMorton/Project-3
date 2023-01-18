@@ -3,10 +3,12 @@ package com.proj3.warehouses.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.proj3.warehouses.models.Cpu;
 import com.proj3.warehouses.repositories.CpuRepository;
 
+@Service
 public class CpuServiceImpl implements CpuService{
 	
 	@Autowired
