@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj3.warehouses.models.Warehouse;
@@ -28,8 +27,8 @@ public class WarehouseController {
 		return service.findAll();
 	}
 	
-	@GetMapping("/{id}") // { } tells Spring Boot this endpoint has a path parameter we want to parse
-	public @ResponseBody Warehouse findById(@PathVariable int id) { // if variable name does not match, specify it @PathVariable(name = "id")
+	@GetMapping("/{id}")
+	public @ResponseBody Warehouse findById(@PathVariable int id) {
 		
 		System.out.println("Inside findById");
 		return service.findById(id);

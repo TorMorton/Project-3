@@ -1,7 +1,5 @@
 package com.proj3.warehouses.services;
 
-import org.springframework.stereotype.Service;
-
 import com.proj3.warehouses.models.Cpu;
 
 public interface CpuService {
