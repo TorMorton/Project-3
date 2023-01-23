@@ -4,11 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AccessingDataMySqlApplication {
+public class SecurityApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(AccessingDataMySqlApplication.class, args);
-  }
-
+	public static void main(String[] args) {
+		SpringApplication.run(SecurityApplication.class, args);
+	}
 
 }

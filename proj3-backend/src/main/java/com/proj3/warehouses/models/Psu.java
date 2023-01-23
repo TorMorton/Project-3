@@ -1,24 +1,24 @@
 package com.proj3.warehouses.models;
 
-import java.io.Serializable;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-
 @Entity
 @DynamicUpdate  // these allow only updates in the columns that have updates to be changed
 @DynamicInsert  // insert only columns that have values
-@Table(name= "gpu_inventory")
-public class Gpu {
-
-
+@Table(name= "psu_inventory")
+public class Psu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "gpu_id")
+    @Column(name = "psu_id")
     private int id;
 
     @Column(name = "manufacturer")
@@ -64,8 +64,6 @@ public class Gpu {
 
     @Override
     public String toString() {
-        return "Gpu [id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", cost=" + cost + "]";
+        return "Psu [id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", cost=" + cost + "]";
     }
-
-
 }
