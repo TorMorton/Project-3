@@ -21,6 +21,7 @@ import com.proj3.warehouses.services.GpuService;
 @Controller
 @CrossOrigin
 @RequestMapping("/gpu_inventory")
+@CrossOrigin
 public class GpuController {
     
 	@Autowired

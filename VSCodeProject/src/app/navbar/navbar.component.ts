@@ -10,11 +10,17 @@ import { WarehousesComponent } from '../warehouses/warehouses.component';
 })
 export class NavbarComponent {
 
+  gpuWarehouseURL: string = 'gpu_inventory/'
+  cpuWarehouseURL: string = 'cpu_inventory/'
+
+  
+
   constructor(private crudService: CRUDService) {}
 
   getWarehouse(warehouseURL: string) {
-    this.crudService.warehouseURL = warehouseURL;
-    this.crudService.getAll;
+    localStorage.setItem(this.crudService.warehouseURL, warehouseURL);
+    console.log("local storage")
+    console.log(localStorage.getItem(this.crudService.warehouseURL))
   }
 
   

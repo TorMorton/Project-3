@@ -1,10 +1,7 @@
-header {
+main {
     display: flex;
-    background-color: #444;
-    margin: auto;
+    margin: 0px;
+    padding: 0px;
+    justify-content: center;
 }
 
-p {
-    margin-left: 10px;
-    padding: 20px;
-}
