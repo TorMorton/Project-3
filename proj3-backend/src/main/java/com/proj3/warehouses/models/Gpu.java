@@ -61,11 +61,14 @@ public class Gpu {
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Gpu [id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", cost=" + cost + "]";
+		return "Gpu [id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", cost=" + cost
+				+ "]";
 	}
+
+	
 	
 
 }

@@ -68,7 +68,7 @@ export class WarehousesComponent{
       this.inventory = data.body;
   })
     this.tempInventory = null;
-    console.log('displaAll() ran')
+    console.log('displayAll() ran')
   }
 
   displayById(id: number) {

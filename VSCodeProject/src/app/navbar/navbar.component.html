@@ -6,9 +6,9 @@
 	<li ngbDropdown class="nav-item">
 		<a href (click)="false" class="nav-link" ngbDropdownToggle>Warehouses</a>
 		<div ngbDropdownMenu>
-			<button ngbDropdownItem routerLink="/warehouses" (click)="getWarehouse('gpu_inventory/')">GPU Warehouse</button>
-			<button ngbDropdownItem routerLink="/warehouses" (click)="getWarehouse('cpu_inventory/')">CPU Warehouse</button>
-			<button ngbDropdownItem routerLink="/warehouses" (click)="getWarehouse('psu_inventory/')">PSU Warehouse</button>
+			<button ngbDropdownItem routerLink="/warehouses" routerLinkActive="active-link" (click)="getWarehouse('gpu_inventory/')">GPU Warehouse</button>
+			<button ngbDropdownItem routerLink="/warehouses" routerLinkActive="active-link" (click)="getWarehouse('cpu_inventory/')">CPU Warehouse</button>
+			<button ngbDropdownItem routerLink="/warehouses" routerLinkActive="active-link" (click)="getWarehouse('psu_inventory/')">PSU Warehouse</button>
 		</div>
 	</li>
 </ul>
