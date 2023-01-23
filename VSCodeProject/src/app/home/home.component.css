@@ -1,3 +1,32 @@
 main {
-    justify-content: center;
+    margin: 36px;
+
 }
+
+h2 {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 48px;
+    margin-bottom: 36px;
+}
+
+.warehouse-cards {
+    margin: 36px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: 24px;
+}
+
+.warehouse-cards h5 {
+    font-weight: bold;
+    font-size: 24px;
+    text-decoration: underline;
+    padding-bottom: 12px;
+}
+
+/* img {
+    max-width: 570px;
+    max-height: 428px;
+} */
+
