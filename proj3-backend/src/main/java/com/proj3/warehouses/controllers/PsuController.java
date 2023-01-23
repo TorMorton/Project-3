@@ -14,45 +14,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.proj3.warehouses.models.Gpu;
-import com.proj3.warehouses.services.GpuService;
-
+import com.proj3.warehouses.models.Psu;
+import com.proj3.warehouses.services.PsuService;
 
 @Controller
 @CrossOrigin
-@RequestMapping("/gpu_inventory")
-@CrossOrigin
-public class GpuController {
-    
+@RequestMapping("/psu_inventory")
+public class PsuController {
+	
 	@Autowired
-	private GpuService service;
+	private PsuService service;
 	
 	@GetMapping
-	public @ResponseBody Iterable<Gpu> findAll() {
+	public @ResponseBody Iterable<Psu> findAll() {
 		System.out.println("Inside findAll");
 		return service.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public @ResponseBody Gpu findById(@PathVariable int id) {
+	public @ResponseBody Psu findById(@PathVariable int id) {
 		System.out.println("Inside findById");
 		return service.findById(id);
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public @ResponseBody Gpu save(@RequestBody Gpu gpu) {
-		System.out.println("Inside controller save!!! " + gpu);
-		Gpu gpuCreated = service.save(gpu);
-		System.out.println("Inside controller save? " + gpuCreated);
-		return gpu;
+	public @ResponseBody Psu save(@RequestBody Psu psu) {
+		System.out.println("Inside controller save!!! " + psu);
+		Psu psuCreated = service.save(psu);
+		System.out.println("Inside controller save? " + psuCreated);
+		return psu;
 	}
 	
 	@PutMapping("/{id}")
-	public @ResponseBody Gpu update(@RequestBody Gpu gpu, @PathVariable int id) {
+	public @ResponseBody Psu update(@RequestBody Psu psu, @PathVariable int id) {
 		System.out.println("Inside update");
-		gpu.setId(id);
-		return service.update(gpu);
+		psu.setId(id);
+		return service.update(psu);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -64,12 +62,9 @@ public class GpuController {
 	
 	@DeleteMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public @ResponseBody void delete(Gpu gpu) {
+	public @ResponseBody void delete(Psu psu) {
 		System.out.println("Inside delete");
-		service.delete(gpu);
+		service.delete(psu);
 	}
-	
-}
-    
-    
 
+}

@@ -21,8 +21,8 @@ export class NavbarComponent {
     localStorage.setItem(this.crudService.warehouseURL, warehouseURL);
     console.log("local storage")
     console.log(localStorage.getItem(this.crudService.warehouseURL))
-    this.crudService.warehouseURL = warehouseURL;
-    this.crudService.getAll;
   }
+
+  
 
 }
