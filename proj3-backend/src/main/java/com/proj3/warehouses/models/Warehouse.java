@@ -18,16 +18,16 @@ public class Warehouse {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "warehouse_id", updatable = false)
+	@Column(name = "warehouse_id")
 	private int id;
 	
-	@Column(name = "name", updatable = false)
+	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "location", updatable = false)
+	@Column(name = "location")
 	private String location;
 	
-	@Column(name = "capacity", updatable = false)
+	@Column(name = "capacity")
 	private final int capacity = 100;
 	
 //	@Column(name = "current_total")
@@ -59,10 +59,6 @@ public class Warehouse {
 
 	public int getCapacity() {
 		return capacity;
-	}
-
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
 	}
 
 //	public int getCurrentTotal() {
