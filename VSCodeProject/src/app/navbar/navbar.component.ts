@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CRUDService } from '../services/crud.service';
+import { WarehouseService } from '../services/warehouse.service';
 import { WarehousesComponent } from '../warehouses/warehouses.component';
 
 @Component({
@@ -14,10 +15,14 @@ export class NavbarComponent {
   cpuWarehouseURL: string = 'cpu_inventory/'
   psuWarehouseURL: string = 'psu_inventory/'
   
+  gpuWarehouse: string = 'GPU Warehouse'
+  cpuWarehouse: string = 'CPU Warehouse'
+  psuWarehouse: string = 'PSU Warehouse'
 
-  constructor(private crudService: CRUDService) {}
+  constructor(private crudService: CRUDService, private warehouseService: WarehouseService) {}
 
-  getWarehouse(warehouseURL: string) {
+  getWarehouse(warehouseURL: string, warehouseName: string) {
+    this.warehouseService.warehouseName = warehouseName;
     sessionStorage.setItem("warehouseURL", warehouseURL);
     console.log("session storage");
     console.log(sessionStorage.getItem("warehouseURL"));

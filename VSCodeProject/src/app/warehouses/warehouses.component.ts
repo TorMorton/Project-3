@@ -19,10 +19,11 @@ export class WarehousesComponent implements OnInit{
   warehouse: any = [];
   tempInventory: any;
   totalInStock: number = 0;
+  warehouseName = this.warehouseService.myWarehouse.subscribe();
 
   // constructor
 
-  constructor(private crudService: CRUDService, private productService: ProductService, private fb: FormBuilder,) {
+  constructor(private crudService: CRUDService, private productService: ProductService, private warehouseService: WarehouseService, private fb: FormBuilder,) {
   //   this.crudService.getAll().subscribe(data => {
   //     console.log(data);
   //     this.inventory = data.body
