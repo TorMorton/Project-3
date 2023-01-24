@@ -30,8 +30,8 @@ public class Warehouse {
 	@Column(name = "capacity")
 	private final int capacity = 100;
 	
-//	@Column(name = "current_total")
-//	private int currentTotal = 0;
+	@Column(name = "current_total")
+	private int currentTotal = 0;
 
 	public int getId() {
 		return id;
@@ -61,18 +61,20 @@ public class Warehouse {
 		return capacity;
 	}
 
-//	public int getCurrentTotal() {
-//		return currentTotal;
-//	}
-//
-//	public void setCurrentTotal(int currentTotal) {
-//		this.currentTotal = currentTotal;
-//	}
+	public int getCurrentTotal() {
+		return currentTotal;
+	}
+
+	public void setCurrentTotal(int currentTotal) {
+		this.currentTotal = currentTotal;
+	}
 
 	@Override
 	public String toString() {
 		return "Warehouse [id=" + id + ", name=" + name + ", location=" + location + ", capacity=" + capacity
-				+ "]";
+				+ ", currentTotal=" + currentTotal + "]";
 	}
+
+	
 
 }

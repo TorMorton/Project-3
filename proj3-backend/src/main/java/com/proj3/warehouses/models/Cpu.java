@@ -29,6 +29,9 @@ public class Cpu {
 	
 	@Column(name = "cost")
 	private int cost;
+	
+	@Column(name = "num_in_stock")
+	private Integer numInStock = 1;
 
 	public int getId() {
 		return id;
@@ -62,8 +65,20 @@ public class Cpu {
 		this.cost = cost;
 	}
 
+	public int getNumInStock() {
+		return numInStock;
+	}
+
+	public void setNumInStock(int numInStock) {
+		this.numInStock = numInStock;
+	}
+
 	@Override
 	public String toString() {
-		return "Cpu [id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", cost=" + cost + "]";
+		return "Cpu [id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", cost=" + cost
+				+ ", numInStock=" + numInStock + "]";
 	}
+	
+	
+	
 }

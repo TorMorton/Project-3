@@ -8,7 +8,7 @@ export class ProductService {
 
   constructor() { }
 
-  product: Product = new Product('', '', 0);
+  product: Product = new Product('', '', 0, 0);
 
   createProduct(newProduct: Product) {
     console.log('inside ProductService');

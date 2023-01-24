@@ -155,7 +155,7 @@
                                 placeholder="Enter manufacturer...">  
                                 <p class="invalid" *ngIf="manufacturer!.invalid && (manufacturer!.touched || manufacturer!.dirty)">
                                     <span *ngIf="manufacturer!.errors?.['required']">Manufacturer is required!</span>
-                                    <span *ngIf="manufacturer!.errors?.['maxLenght']">Cannot be longer than 50 characters!</span>
+                                    <span *ngIf="manufacturer!.errors?.['maxLength']">Cannot be longer than 50 characters!</span>
                                 </p>    
                         </div>                 
                         <div>
@@ -168,7 +168,7 @@
                                 placeholder="Enter model...">
                                 <p class="invalid" *ngIf="model!.invalid && (model!.touched || model!.dirty)">
                                     <span *ngIf="model!.errors?.['required']">Model is required!</span>
-                                    <span *ngIf="model!.errors?.['maxLenght']">Model cannot be longer than 50 characters!</span>
+                                    <span *ngIf="model!.errors?.['maxLength']">Model cannot be longer than 50 characters!</span>
                                 </p>
                         </div>
         
@@ -182,7 +182,21 @@
                                    placeholder="Enter price...">
                                    <p class="invalid" *ngIf="price!.invalid && (price!.touched || price!.dirty)">
                                     <span *ngIf="price!.errors?.['required']">Price is required!</span>
-                                    <span *ngIf="price!.errors?.['maxLenght']">Price cannot be less than 0</span>
+                                    <span *ngIf="price!.errors?.['maxLength']">Price cannot be less than 0</span>
+                                   </p>
+                        </div>
+
+                        <div>
+                            <label for="numInStock">Number in Stock</label>
+                            <input type="number" min="1"
+                                   formControlName="numInStock" 
+                                   class="formField" 
+                                   name="numInStock" 
+                                   id="numInStock" 
+                                   placeholder="Enter number in stock...">
+                                   <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
+                                    <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
+                                    <span *ngIf="numInStock!.errors?.['maxLength']">Number in Stock cannot be less than 1</span>
                                    </p>
                         </div>
                           
@@ -207,6 +221,7 @@
                             <th scope="col">Manufacturer</th>
                             <th scope="col">Model</th>
                             <th scope="col">Cost</th>
+                            <th scope="col"># in Stock</th>
                             <th scope="col">Tools</th>
                         </tr>
                     </thead>
@@ -217,6 +232,7 @@
                                 <td> {{ item.manufacturer }}</td>
                                 <td> {{ item.model }} </td>
                                 <td> {{ item.cost }} </td>
+                                <td> {{ item.numInStock }} </td>
                                 <td id="table-tools"> 
                                     <!-- Button trigger edit modal -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
@@ -248,6 +264,7 @@
                             <th scope="col">Manufacturer</th>
                             <th scope="col">Model</th>
                             <th scope="col">Cost</th>
+                            <th scope="col"># in Stock</th>
                             <th scope="col">Tools</th>
                         </tr>
                     </thead>
@@ -258,6 +275,7 @@
                                 <td> {{ item.manufacturer }}</td>
                                 <td> {{ item.model }} </td>
                                 <td> {{ item.cost }} </td>
+                                <td> {{ item.numInStock }} </td>
                                 <td id="table-tools"> 
                                     <!-- Button trigger edit modal -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 

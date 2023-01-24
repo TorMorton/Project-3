@@ -33,6 +33,7 @@ export class WarehousesComponent{
       manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       price: [0, Validators.compose([Validators.required])],
+      numInStock: [1, Validators.compose([Validators.required])]
     }
   );
 
@@ -48,10 +49,15 @@ export class WarehousesComponent{
     return this.productForm.get('price');
   }
 
+  get numInStock() {
+    return this.productForm.get('numInStock');
+  }
+
   tempProduct: any = {
     manufacturer: 'manufacturer',
     model: 'model',
-    cost: 0 
+    cost: 0,
+    numInStock: 0
   };
 
   tempProductId: number = 0;
@@ -88,6 +94,7 @@ export class WarehousesComponent{
         this.tempProduct.model = item.model;
         this.tempProduct.cost = item.cost;
         this.tempProduct.id = id;
+        this.tempProduct.numInStock = item.numInStock;
         break;        
       }
     }
@@ -96,10 +103,12 @@ export class WarehousesComponent{
   onSubmit(): void {
     this.productService.createProduct(new Product(this.manufacturer?.value!, 
                                                   this.model?.value!, 
-                                                  this.price?.value!));
+                                                  this.price?.value!,
+                                                  this.numInStock?.value!));
     this.tempProduct.manufacturer = this.productService.product.manufacturer;
     this.tempProduct.model = this.productService.product.model;
     this.tempProduct.cost = this.productService.product.cost;
+    this.tempProduct.numInStock = this.productService.product.numInStock;
   }
 
   save() {
