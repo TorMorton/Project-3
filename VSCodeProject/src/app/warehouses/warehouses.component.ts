@@ -4,6 +4,7 @@ import { Product } from '../models/product';
 import { CRUDService } from '../services/crud.service';
 import { ProductService } from '../services/product.service';
 import { Observable } from 'rxjs';
+import { WarehouseService } from '../services/warehouse.service';
 
 @Component({
   selector: 'app-warehouses',
@@ -15,7 +16,9 @@ export class WarehousesComponent{
   // class properties
   isCollapsed: boolean = true;
   inventory: any = [];
+  warehouse: any = [];
   tempInventory: any;
+  totalInStock: number = 0;
 
   // constructor
 
@@ -26,6 +29,7 @@ export class WarehousesComponent{
   })
   }
 
+  
 
   // form properties
   productForm = this.fb.group(
@@ -141,6 +145,13 @@ export class WarehousesComponent{
       });
     }
     this.displayAll();
+  }
+
+  countCurrentTotal(): number {
+    for (let item of this.inventory) {
+      this.totalInStock += item.numInStock;
+    }
+    return this.totalInStock;
   }
   
 }
