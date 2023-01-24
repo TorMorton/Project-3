@@ -28,7 +28,7 @@ public class Warehouse {
 	private String location;
 	
 	@Column(name = "capacity", updatable = false)
-	private int capacity = 100;
+	private final int capacity = 100;
 	
 //	@Column(name = "current_total")
 //	private int currentTotal = 0;
