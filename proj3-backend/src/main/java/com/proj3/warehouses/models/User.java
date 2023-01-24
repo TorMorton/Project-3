@@ -1,70 +1,44 @@
 package com.proj3.warehouses.models;
 
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@NamedQuery(name = "User.findByEmailId", query = "SELECT u FROM User u WHERE u.email = :email")
+
+@Data  // makes it so we do not need to write getters and setters and constructors
 @Entity
-@Table(name = "_user")
-public class User implements UserDetails {
+@DynamicUpdate
+@DynamicInsert
+@Table(name = "user")
+public class User implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-    private String firstname;
-    private String lastname;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "contactNumber")
+    private String contactNumber;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column
+    private String status;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority(role.name()));
-    }
+    @Column
+    private String role;
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
 
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

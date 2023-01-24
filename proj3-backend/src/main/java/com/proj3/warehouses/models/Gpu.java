@@ -1,9 +1,6 @@
 package com.proj3.warehouses.models;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
-
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -64,8 +61,11 @@ public class Gpu {
 
     @Override
     public String toString() {
-        return "Gpu [id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", cost=" + cost + "]";
+        return "Gpu [id=" + id + ", manufacturer=" + manufacturer + ", model=" + model + ", cost=" + cost
+                + "]";
     }
+
+
 
 
 }
