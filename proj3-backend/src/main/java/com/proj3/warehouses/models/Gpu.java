@@ -28,7 +28,7 @@ public class Gpu {
 	private String model;
 	
 	@Column(name = "cost")
-	private int cost;
+	private double cost;
 	
 	@Column(name = "num_in_stock")
 	private Integer numInStock = 1;
@@ -57,11 +57,11 @@ public class Gpu {
 		this.model = model;
 	}
 
-	public int getCost() {
+	public double getCost() {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 	
