@@ -22,7 +22,6 @@ export class NavbarComponent {
   constructor(private crudService: CRUDService, private warehouseService: WarehouseService) {}
 
   getWarehouse(warehouseURL: string, warehouseName: string) {
-    this.warehouseService.warehouseName = warehouseName;
     sessionStorage.setItem("warehouseURL", warehouseURL);
     console.log("session storage");
     console.log(sessionStorage.getItem("warehouseURL"));
@@ -32,7 +31,7 @@ export class NavbarComponent {
   refresh() {
     setTimeout(() => {
       window.location.reload();
-    }, 250);
+    }, 25);
   }
 
   

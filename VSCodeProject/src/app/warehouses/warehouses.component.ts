@@ -5,6 +5,7 @@ import { CRUDService } from '../services/crud.service';
 import { ProductService } from '../services/product.service';
 import { Observable } from 'rxjs';
 import { WarehouseService } from '../services/warehouse.service';
+import { Warehouse } from '../models/warehouse';
 
 @Component({
   selector: 'app-warehouses',
@@ -16,10 +17,10 @@ export class WarehousesComponent implements OnInit{
   // class properties
   isCollapsed: boolean = true;
   inventory: any = [];
-  warehouse: any = [];
   tempInventory: any;
   totalInStock: number = 0;
-  warehouseName = this.warehouseService.myWarehouse.subscribe();
+  warehouses: Warehouse[] = this.warehouseService.warehouses;
+  nameId: number = 0;
 
   // constructor
 
@@ -70,6 +71,17 @@ export class WarehousesComponent implements OnInit{
   // methods
   ngOnInit(): void {
     this.displayAll();
+    switch (sessionStorage.getItem("warehouseURL")) {
+      case ("gpu_inventory/") :
+        this.nameId = 0;
+        break;
+      case ("cpu_inventory/") :
+        this.nameId = 1;
+        break;
+      case ("psu_inventory/") :
+        this.nameId = 2;
+        break;
+    }
   }
 
   displayAll() {
@@ -154,4 +166,10 @@ export class WarehousesComponent implements OnInit{
     return this.totalInStock;
   }
   
+
+
+  
+
+
+
 }

@@ -1,18 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Warehouse } from '../models/warehouse';
 import { CRUDService } from '../services/crud.service';
+import { WarehouseService } from '../services/warehouse.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   gpuWarehouseURL: string = 'gpu_inventory/'
   cpuWarehouseURL: string = 'cpu_inventory/'
   psuWarehouseURL: string = 'psu_inventory/'
 
-  constructor(private crudService: CRUDService) {}
+  warehouses: Warehouse[] = this.warehouseService.warehouses;
+
+  constructor(private crudService: CRUDService, private warehouseService: WarehouseService) {}
+  
+
 
   getWarehouse(warehouseURL: string) {
     sessionStorage.setItem("warehouseURL", warehouseURL);
@@ -21,6 +27,20 @@ export class HomeComponent {
     this.crudService.getAll();
   }
 
- 
+  
+  getAll() {
+    sessionStorage.setItem("warehouseURL", "warehouses");
+    this.crudService.getAll().subscribe (data => {
+      console.log(data)
+      this.warehouses = data.body;
+
+    })
+    
+  }
+
+  ngOnInit(): void {
+    this.getAll();
+    console.log(this.warehouses)
+  }
 
 }

@@ -10,7 +10,12 @@ export class WarehouseService {
   constructor() { }
 
   warehouse: Warehouse = new Warehouse ('', '', 0)
-  warehouseName: string = '';
+
+  warehouses: Warehouse[] = [
+    new Warehouse('GPU Warehouse', 'Taiwan', 0),
+    new Warehouse('CPU Warehouse', 'China', 0),
+    new Warehouse('PSU Warehouse', 'Thailand', 0)
+  ]
 
   createWarehouse(newWarehouse: Warehouse) {
     console.log('inside WarehouseService');
@@ -18,8 +23,5 @@ export class WarehouseService {
     console.log(this.warehouse.warehouseName);
   }
 
-  private currentWarehouse = new BehaviorSubject(this.warehouseName);
-
-  myWarehouse = this.currentWarehouse.asObservable();
 
 }

@@ -118,11 +118,16 @@
     </div>
   </div>
 
-  <div>
-    <h2>{{ warehouseName }}</h2>
-
-  </div>
-
+  <div class="container-fluid bg-black rounded text-white position-relative" style="--bs-bg-opacity: .8; margin-bottom: 12px;">
+    <div class="row gx-3" id="card">
+        <div class="col-sm-8 " id="card-body">
+          <div class="p-3">
+              <h5 class="card-title">{{ warehouses[this.nameId].warehouseName }}</h5>
+              <p class="card-text">Location: {{ warehouses[this.nameId].location }}     Capacity: {{ warehouses[this.nameId].capacity }}    Current Total: {{ warehouses[this.nameId].currentTotal }}</p>
+          </div>
+        </div>
+      </div>              
+    </div>
     <!-- ToolBar Buttons -->
     <section class="button-section">
 
@@ -199,7 +204,6 @@
                                    placeholder="Enter price...">
                                    <p class="invalid" *ngIf="price!.invalid && (price!.touched || price!.dirty)">
                                     <span *ngIf="price!.errors?.['required']">Price is required!</span>
-                                    <span *ngIf="price!.errors?.['maxLength']">Price cannot be less than 0</span>
                                    </p>
                         </div>
 
@@ -213,7 +217,6 @@
                                    placeholder="Enter number in stock...">
                                    <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
                                     <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
-                                    <span *ngIf="numInStock!.errors?.['maxLength']">Number in Stock cannot be less than 1</span>
                                    </p>
                         </div>
                           
