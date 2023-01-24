@@ -18,20 +18,20 @@ public class Warehouse {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "warehouse_id", updatable = false)
+	@Column(name = "warehouse_id")
 	private int id;
 	
-	@Column(name = "name", updatable = false)
+	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "location", updatable = false)
+	@Column(name = "location")
 	private String location;
 	
-	@Column(name = "capacity", updatable = false)
-	private int capacity = 100;
+	@Column(name = "capacity")
+	private final int capacity = 100;
 	
-//	@Column(name = "current_total")
-//	private int currentTotal = 0;
+	@Column(name = "current_total")
+	private int currentTotal = 0;
 
 	public int getId() {
 		return id;
@@ -61,22 +61,20 @@ public class Warehouse {
 		return capacity;
 	}
 
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+	public int getCurrentTotal() {
+		return currentTotal;
 	}
 
-//	public int getCurrentTotal() {
-//		return currentTotal;
-//	}
-//
-//	public void setCurrentTotal(int currentTotal) {
-//		this.currentTotal = currentTotal;
-//	}
+	public void setCurrentTotal(int currentTotal) {
+		this.currentTotal = currentTotal;
+	}
 
 	@Override
 	public String toString() {
 		return "Warehouse [id=" + id + ", name=" + name + ", location=" + location + ", capacity=" + capacity
-				+ "]";
+				+ ", currentTotal=" + currentTotal + "]";
 	}
+
+	
 
 }

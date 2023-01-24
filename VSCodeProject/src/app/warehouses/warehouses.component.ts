@@ -4,6 +4,7 @@ import { Product } from '../models/product';
 import { CRUDService } from '../services/crud.service';
 import { ProductService } from '../services/product.service';
 import { Observable } from 'rxjs';
+import { WarehouseService } from '../services/warehouse.service';
 
 @Component({
   selector: 'app-warehouses',
@@ -15,7 +16,9 @@ export class WarehousesComponent implements OnInit{
   // class properties
   isCollapsed: boolean = true;
   inventory: any = [];
+  warehouse: any = [];
   tempInventory: any;
+  totalInStock: number = 0;
 
   // constructor
 
@@ -26,8 +29,6 @@ export class WarehousesComponent implements OnInit{
   // })
   }
 
-  
-
 
   // form properties
   productForm = this.fb.group(
@@ -35,6 +36,7 @@ export class WarehousesComponent implements OnInit{
       manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       price: [0, Validators.compose([Validators.required])],
+      numInStock: [1, Validators.compose([Validators.required])]
     }
   );
 
@@ -50,10 +52,15 @@ export class WarehousesComponent implements OnInit{
     return this.productForm.get('price');
   }
 
+  get numInStock() {
+    return this.productForm.get('numInStock');
+  }
+
   tempProduct: any = {
     manufacturer: 'manufacturer',
     model: 'model',
-    cost: 0 
+    cost: 0,
+    numInStock: 0
   };
 
   tempProductId: number = 0;
@@ -90,6 +97,7 @@ export class WarehousesComponent implements OnInit{
         this.tempProduct.model = item.model;
         this.tempProduct.cost = item.cost;
         this.tempProduct.id = id;
+        this.tempProduct.numInStock = item.numInStock;
         break;        
       }
     }
@@ -98,10 +106,12 @@ export class WarehousesComponent implements OnInit{
   onSubmit(): void {
     this.productService.createProduct(new Product(this.manufacturer?.value!, 
                                                   this.model?.value!, 
-                                                  this.price?.value!));
+                                                  this.price?.value!,
+                                                  this.numInStock?.value!));
     this.tempProduct.manufacturer = this.productService.product.manufacturer;
     this.tempProduct.model = this.productService.product.model;
     this.tempProduct.cost = this.productService.product.cost;
+    this.tempProduct.numInStock = this.productService.product.numInStock;
   }
 
   save() {
@@ -134,6 +144,13 @@ export class WarehousesComponent implements OnInit{
       });
     }
     this.displayAll();
+  }
+
+  countCurrentTotal(): number {
+    for (let item of this.inventory) {
+      this.totalInStock += item.numInStock;
+    }
+    return this.totalInStock;
   }
   
 }
