@@ -24,6 +24,12 @@ export class NavbarComponent {
     this.crudService.getAll();
   }
 
+  refresh() {
+    setTimeout(() => {
+      window.location.reload();
+    }, 250);
+  }
+
   
 
 }
