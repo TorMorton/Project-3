@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators} from '@angular/forms';
 import { Product } from '../models/product';
 import { CRUDService } from '../services/crud.service';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   templateUrl: './warehouses.component.html',
   styleUrls: ['./warehouses.component.css']
 })
-export class WarehousesComponent{
+export class WarehousesComponent implements OnInit{
 
   // class properties
   isCollapsed: boolean = true;
@@ -20,11 +20,13 @@ export class WarehousesComponent{
   // constructor
 
   constructor(private crudService: CRUDService, private productService: ProductService, private fb: FormBuilder,) {
-    this.crudService.getAll().subscribe(data => {
-      console.log(data);
-      this.inventory = data.body
-  })
+  //   this.crudService.getAll().subscribe(data => {
+  //     console.log(data);
+  //     this.inventory = data.body
+  // })
   }
+
+  
 
 
   // form properties
@@ -58,7 +60,7 @@ export class WarehousesComponent{
 
 
   // methods
-  onInIt() {
+  ngOnInit(): void {
     this.displayAll();
   }
 
