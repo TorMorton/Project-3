@@ -11,20 +11,20 @@ import { Product } from '../models/product';
 export class CRUDService {
 
   apiUrl: string = environment.apiURL;
-  warehouseURL: string = "";
   tempUrl: string = "";
 
   constructor(private httpClient: HttpClient) { }
 
   // functions to get all
   getAll(): Observable<HttpResponse<any>> {
-    this.tempUrl = this.apiUrl + localStorage.getItem(this.warehouseURL);
+    this.tempUrl = this.apiUrl + sessionStorage.getItem("warehouseURL");
+    console.log("crud tempURL");
     console.log(this.tempUrl);
     return this.httpClient.get<any>(this.tempUrl, {observe: 'response'})
   }
 
   save(object: Product): Observable<HttpResponse<any>> {
-    this.tempUrl = this.apiUrl + localStorage.getItem(this.warehouseURL);
+    this.tempUrl = this.apiUrl + sessionStorage.getItem("warehouseURL");
     console.log('inside crud save')
     console.log(this.tempUrl);
     console.log( object);
@@ -32,7 +32,7 @@ export class CRUDService {
   }
 
   update(object: Product, id: number): Observable<HttpResponse<any>> {
-    this.tempUrl = this.apiUrl + localStorage.getItem(this.warehouseURL);
+    this.tempUrl = this.apiUrl + sessionStorage.getItem("warehouseURL");
     console.log('inside crud update')
     console.log(this.tempUrl);
     console.log(object);
@@ -40,7 +40,7 @@ export class CRUDService {
   }
 
   deleteById(id: number): Observable<HttpResponse<any>> {
-    this.tempUrl = this.apiUrl + localStorage.getItem(this.warehouseURL);
+    this.tempUrl = this.apiUrl + sessionStorage.getItem("warehouseURL");
     console.log('inside crud deleteById')
     console.log(this.tempUrl);
     console.log(id);
@@ -48,7 +48,7 @@ export class CRUDService {
   }
 
   deleteAll(): Observable<HttpResponse<any>> {
-    this.tempUrl = this.apiUrl + localStorage.getItem(this.warehouseURL);
+    this.tempUrl = this.apiUrl + sessionStorage.getItem("warehouseURL");
     console.log("inside deleteAll")
     console.log(this.tempUrl);
     return this.httpClient.delete<any>(this.tempUrl, {observe: 'response'});  

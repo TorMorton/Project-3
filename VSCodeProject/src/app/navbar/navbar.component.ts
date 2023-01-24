@@ -18,10 +18,9 @@ export class NavbarComponent {
   constructor(private crudService: CRUDService) {}
 
   getWarehouse(warehouseURL: string) {
-    localStorage.setItem(this.crudService.warehouseURL, warehouseURL);
-    console.log("local storage")
-    console.log(localStorage.getItem(this.crudService.warehouseURL))
-    this.crudService.warehouseURL = warehouseURL;
+    sessionStorage.setItem("warehouseURL", warehouseURL);
+    console.log("session storage");
+    console.log(sessionStorage.getItem("warehouseURL"));
     this.crudService.getAll();
   }
 
