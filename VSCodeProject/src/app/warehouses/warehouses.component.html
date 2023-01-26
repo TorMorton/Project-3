@@ -8,8 +8,8 @@
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Product</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body mx-auto">
-            <form [formGroup]="productForm" class="editForm">
+        <div class="modal-body">
+            <form [formGroup]="productForm" class="productForm">
                 <div>
                     <label for="manufacturer">Manufacturer</label>
                     <input type="text" 
@@ -60,6 +60,7 @@
                            placeholder="Enter price...">
                            <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
                             <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
+                            <span *ngIf="numInStock!.errors?.['max']">Warehouse Over Capacity!</span>
                            </p>
                 </div>
               </form>
@@ -118,16 +119,17 @@
     </div>
   </div>
 
-    <div class="card w-auto">
-         <div class="card-body mx-auto">
-            <h2 class="card-title">{{ warehouses[this.nameId].warehouseName }}</h2>
-        </div>
-        <div class="card-text mx-auto">
-            <span class="px-2"><h5 class="d-inline-block px-1">Location:      </h5> {{ warehouses[this.nameId].location }}    </span>
-            <span class="px-2"><h5 class="d-inline-block px-1">Capacity:      </h5> {{ warehouses[this.nameId].capacity }}    </span>   
-            <span class="px-2"><h5 class="d-inline-block px-1">Current Total: </h5> {{ this.totalInStock }}</span>
-        </div>
+  <div class="card w-auto">
+    <div class="card-body mx-auto">
+        <h2 class="card-title">{{ warehouses[this.nameId].warehouseName }}</h2>
     </div>
+    <div class="card-text mx-auto">
+        <span class="px-2"><h5 class="d-inline-block px-1">Location:      </h5> {{ warehouses[this.nameId].location }}    </span>
+        <span class="px-2"><h5 class="d-inline-block px-1">Capacity:      </h5> {{ warehouses[this.nameId].capacity }}    </span>   
+        <span class="px-2"><h5 class="d-inline-block px-1">Current Total: </h5> {{ this.totalInStock }}</span>
+    </div>
+  </div>
+
 
     <!-- ToolBar Buttons -->
     <section class="button-section">
@@ -202,7 +204,8 @@
                                    placeholder="Enter number in stock...">
                                    <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
                                     <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
-                                    <span *ngIf="model!.errors?.['max']">Not enough space in warehouse</span>
+                                    <span *ngIf="numInStock!.errors?.['maxLength']">Number in Stock cannot be less than 1</span>
+                                    <span *ngIf="numInStock!.errors?.['max']">Warehouse Over Capacity!</span>
                                    </p>
                         </div>
                         <button type="button"  class="btn btn-primary" (click)="onSubmit(); save(); productForm.reset(); collapse.toggle(); displayAll()"  data-bs-dismiss="modal" [disabled]="productForm.invalid">Submit</button>
@@ -239,7 +242,7 @@
                                 <td id="table-tools"> 
                                     <!-- Button trigger edit modal -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
-                                    (click)="findById(item.id)">
+                                    (click)="findById(item.id); countCurrentTotal();">
                                         Edit
                                     </button>
                                     <!-- Button trigger delete modal -->

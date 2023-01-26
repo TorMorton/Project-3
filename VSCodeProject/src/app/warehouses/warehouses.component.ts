@@ -20,7 +20,7 @@ export class WarehousesComponent implements OnInit{
   inventory: any = [];
   tempInventory: any;
   totalInStock: number = 0;
-  limit = 100 - this.totalInStock;
+  limit: number = 0;
   warehouses: Warehouse[] = this.warehouseService.warehouses;
   nameId: number = 0;
 
@@ -28,20 +28,24 @@ export class WarehousesComponent implements OnInit{
   // constructor
 
   constructor(private crudService: CRUDService, private productService: ProductService, private warehouseService: WarehouseService, private fb: FormBuilder,) {
-  //   this.crudService.getAll().subscribe(data => {
-  //     console.log(data);
-  //     this.inventory = data.body
-  // })
   }
 
 
   // form properties
+
+  tempWarehouse: any = {
+    name: this.warehouseService.warehouses[this.nameId].warehouseName,
+    location: this.warehouseService.warehouses[this.nameId].location,
+    capacity: 100,
+    currentTotal: 0
+  };
+
   productForm = this.fb.group(
     {
       manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       price: [0, Validators.compose([Validators.required])],
-      numInStock: [1, Validators.compose([Validators.required, Validators.max(this.limit)])]
+      numInStock: [1, Validators.compose([Validators.required, Validators.max(100 - this.tempWarehouse.currentTotal)])]
     }
   );
 
@@ -68,13 +72,6 @@ export class WarehousesComponent implements OnInit{
     numInStock: 0
   };
 
-  tempWarehouse: any = {
-    name: this.warehouseService.warehouses[this.nameId].warehouseName,
-    location: this.warehouseService.warehouses[this.nameId].location,
-    capacity: 100,
-    currentTotal: 0
-  };
-
   tempProductId: number = 0;
 
 
@@ -92,7 +89,9 @@ export class WarehousesComponent implements OnInit{
       case ("psu_inventory/") :
         this.nameId = 2;
         break;
-    }    
+    }
+    
+    
   }
 
   displayAll() {
@@ -101,6 +100,7 @@ export class WarehousesComponent implements OnInit{
       this.inventory = data.body;
       console.log(this.inventory);
       this.countCurrentTotal();
+      this.limit = 100 - this.totalInStock;
   })
     this.tempInventory = null;
   }
@@ -140,17 +140,18 @@ export class WarehousesComponent implements OnInit{
   }
 
   save() {
+    if (this.checkCapacity()){
     this.countCurrentTotal();
     this.crudService.save(this.tempProduct).subscribe(data => {
       console.log(data);
       this.displayAll();
-      
-    });
+     });
+    }
   }
   
   update() {
     console.log('inside warehouse update()')
-    if(this.tempProduct.numInStock + this.totalInStock <= this.warehouseService.warehouses[this.nameId].capacity ){
+    if(this.checkCapacity()){
       this.crudService.update(this.tempProduct, this.tempProduct.id).subscribe(data => {
         console.log(data);
         this.displayAll();
@@ -184,6 +185,28 @@ export class WarehousesComponent implements OnInit{
     this.tempWarehouse.currentTotal = this.totalInStock;
     this.crudService.updateCurrentTotal(this.tempWarehouse, this.nameId + 1).subscribe(data => {
       console.log(data)
+      console.log(this.totalInStock);
     })
+
+    this.productForm = this.fb.group(
+      {
+        manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
+        model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
+        price: [0, Validators.compose([Validators.required])],
+        numInStock: [1, Validators.compose([Validators.required, Validators.max(100 - this.tempWarehouse.currentTotal)])]
+      }
+    );
   }
+
+  checkCapacity(): boolean {
+    if(this.tempProduct.numInStock + this.totalInStock <= this.warehouseService.warehouses[this.nameId].capacity ) {
+    return true;
+  } else {
+    return false;
+  }
+ }
+
+ setCurrentLimit(): number {
+  return 100 - this.totalInStock;
+ }
 }
