@@ -206,7 +206,15 @@ export class WarehousesComponent implements OnInit{
   }
  }
 
- setCurrentLimit(): number {
-  return 100 - this.totalInStock;
+ updateFormToEdit(): void {
+  this.productForm = this.fb.group(
+    {
+      manufacturer: [this.tempProduct.manufacturer, Validators.compose([Validators.maxLength(50), Validators.required])],
+      model: [this.tempProduct.model, Validators.compose([Validators.maxLength(50), Validators.required])],
+      price: [this.tempProduct.price, Validators.compose([Validators.required])],
+      numInStock: [this.tempProduct.numInStock, Validators.compose([Validators.required, Validators.max(100 - (this.tempWarehouse.currentTotal - this.tempProduct.numInStock))])]
+    }
+  );
+
  }
 }
