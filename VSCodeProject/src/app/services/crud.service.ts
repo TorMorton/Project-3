@@ -48,11 +48,11 @@ export class CRUDService {
   }
 
   updateCurrentTotal(object: Warehouse, id: number): Observable<HttpResponse<any>> {
-    this.tempUrl = this.apiUrl + 'warehouses/';
+    this.tempUrl = this.apiUrl + 'warehouses/' + id;
     console.log('inside crud update')
     console.log(this.tempUrl);
     console.log(object);
-    return this.httpClient.put<any>(this.tempUrl + id, object, {observe: 'response'});
+    return this.httpClient.put<any>(this.tempUrl, object, {observe: 'response'});
   }
 
   deleteById(id: number): Observable<HttpResponse<any>> {

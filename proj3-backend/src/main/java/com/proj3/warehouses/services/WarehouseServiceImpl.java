@@ -28,6 +28,8 @@ public class WarehouseServiceImpl implements WarehouseService{
 	
 	@Override
 	public Warehouse update(Warehouse warehouse) {
+		System.out.println("inside warehouse servimp");
+		System.out.println(warehouse);
 		if (repository.existsById(warehouse.getId())) {
 			return repository.save(warehouse);
 		}

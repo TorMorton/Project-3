@@ -79,7 +79,7 @@ export class WarehousesComponent implements OnInit{
   // methods
   ngOnInit(): void {
     this.displayAll();
-    this.countCurrentTotal();
+
     switch (sessionStorage.getItem("warehouseURL")) {
       case ("gpu_inventory/") :
         this.nameId = 0;
@@ -90,8 +90,7 @@ export class WarehousesComponent implements OnInit{
       case ("psu_inventory/") :
         this.nameId = 2;
         break;
-    }
-    
+    }    
   }
 
   displayAll() {
@@ -172,18 +171,17 @@ export class WarehousesComponent implements OnInit{
     this.displayAll();
   }
 
-
-
   countCurrentTotal(): void {
+    console.log('run currentTotal')
     this.totalInStock = 0;
     for (let item of this.inventory) {
       this.totalInStock += item.numInStock;
-      
     }
     this.tempWarehouse.currentTotal = this.totalInStock;
-    this.warehouseService.warehouses[this.nameId].currentTotal = this.totalInStock;
-    this.crudService.updateCurrentTotal(this.tempWarehouse, this.nameId + 1)
-    console.log('run currentTotal')
+    // this.warehouseService.warehouses[this.nameId].currentTotal = this.totalInStock;
+    this.crudService.updateCurrentTotal(this.tempWarehouse, this.nameId + 1).subscribe(data => {
+      console.log(data)
+    })
   }
   
 

@@ -38,7 +38,7 @@ public class WarehouseController {
 	
 	@PutMapping("/{id}")
 	public @ResponseBody Warehouse update(@RequestBody Warehouse warehouse, @PathVariable int id) {
-		System.out.println("Inside update");
+		System.out.println("Inside warehouse update");
 		warehouse.setId(id);
 		return service.update(warehouse);
 	}
