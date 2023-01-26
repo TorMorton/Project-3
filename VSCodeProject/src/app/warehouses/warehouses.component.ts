@@ -20,7 +20,7 @@ export class WarehousesComponent implements OnInit{
   inventory: any = [];
   tempInventory: any;
   totalInStock: number = 0;
-  limit = 100 - this.totalInStock;
+  limit: number = 0;
   warehouses: Warehouse[] = this.warehouseService.warehouses;
   nameId: number = 0;
 
@@ -32,12 +32,20 @@ export class WarehousesComponent implements OnInit{
 
 
   // form properties
+
+  tempWarehouse: any = {
+    name: this.warehouseService.warehouses[this.nameId].warehouseName,
+    location: this.warehouseService.warehouses[this.nameId].location,
+    capacity: 100,
+    currentTotal: 0
+  };
+
   productForm = this.fb.group(
     {
       manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       price: [0, Validators.compose([Validators.required])],
-      numInStock: [1, Validators.compose([Validators.required, Validators.max(this.setCurrentLimit())])]
+      numInStock: [1, Validators.compose([Validators.required, Validators.max(100 - this.tempWarehouse.currentTotal)])]
     }
   );
 
@@ -64,13 +72,6 @@ export class WarehousesComponent implements OnInit{
     numInStock: 0
   };
 
-  tempWarehouse: any = {
-    name: this.warehouseService.warehouses[this.nameId].warehouseName,
-    location: this.warehouseService.warehouses[this.nameId].location,
-    capacity: 100,
-    currentTotal: 0
-  };
-
   tempProductId: number = 0;
 
 
@@ -88,7 +89,9 @@ export class WarehousesComponent implements OnInit{
       case ("psu_inventory/") :
         this.nameId = 2;
         break;
-    }    
+    }
+    
+    
   }
 
   displayAll() {
@@ -97,6 +100,7 @@ export class WarehousesComponent implements OnInit{
       this.inventory = data.body;
       console.log(this.inventory);
       this.countCurrentTotal();
+      this.limit = 100 - this.totalInStock;
   })
     this.tempInventory = null;
   }
@@ -183,6 +187,15 @@ export class WarehousesComponent implements OnInit{
       console.log(data)
       console.log(this.totalInStock);
     })
+
+    this.productForm = this.fb.group(
+      {
+        manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
+        model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
+        price: [0, Validators.compose([Validators.required])],
+        numInStock: [1, Validators.compose([Validators.required, Validators.max(100 - this.tempWarehouse.currentTotal)])]
+      }
+    );
   }
 
   checkCapacity(): boolean {

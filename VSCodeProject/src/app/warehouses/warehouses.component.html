@@ -60,6 +60,7 @@
                            placeholder="Enter price...">
                            <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
                             <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
+                            <span *ngIf="numInStock!.errors?.['max']">Warehouse Over Capacity!</span>
                            </p>
                 </div>
               </form>
@@ -204,6 +205,7 @@
                                    <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
                                     <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
                                     <span *ngIf="numInStock!.errors?.['maxLength']">Number in Stock cannot be less than 1</span>
+                                    <span *ngIf="numInStock!.errors?.['max']">Warehouse Over Capacity!</span>
                                    </p>
                         </div>
                         <button type="button"  class="btn btn-primary" (click)="onSubmit(); save(); productForm.reset(); collapse.toggle(); displayAll()"  data-bs-dismiss="modal" [disabled]="productForm.invalid">Submit</button>
