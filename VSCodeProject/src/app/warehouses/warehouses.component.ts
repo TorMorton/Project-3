@@ -22,6 +22,7 @@ export class WarehousesComponent implements OnInit{
   warehouses: Warehouse[] = this.warehouseService.warehouses;
   nameId: number = 0;
 
+
   // constructor
 
   constructor(private crudService: CRUDService, private productService: ProductService, private warehouseService: WarehouseService, private fb: FormBuilder,) {
@@ -65,12 +66,20 @@ export class WarehousesComponent implements OnInit{
     numInStock: 0
   };
 
+  tempWarehouse: any = {
+    warehouseName: this.warehouseService.warehouses[this.nameId].warehouseName,
+    location: this.warehouseService.warehouses[this.nameId].location,
+    capacity: 100,
+    currentTotal: 0
+  };
+
   tempProductId: number = 0;
 
 
   // methods
   ngOnInit(): void {
     this.displayAll();
+    this.countCurrentTotal();
     switch (sessionStorage.getItem("warehouseURL")) {
       case ("gpu_inventory/") :
         this.nameId = 0;
@@ -82,15 +91,17 @@ export class WarehousesComponent implements OnInit{
         this.nameId = 2;
         break;
     }
+    
   }
 
   displayAll() {
     this.crudService.getAll().subscribe(data => {
       console.log(data);
       this.inventory = data.body;
+      console.log(this.inventory);
+      this.countCurrentTotal();
   })
     this.tempInventory = null;
-    console.log('displayAll() ran')
   }
 
   displayById(id: number) {
@@ -128,9 +139,11 @@ export class WarehousesComponent implements OnInit{
   }
 
   save() {
+    this.countCurrentTotal();
     this.crudService.save(this.tempProduct).subscribe(data => {
       console.log(data);
       this.displayAll();
+      
     });
   }
   
@@ -159,11 +172,18 @@ export class WarehousesComponent implements OnInit{
     this.displayAll();
   }
 
-  countCurrentTotal(): number {
+
+
+  countCurrentTotal(): void {
+    this.totalInStock = 0;
     for (let item of this.inventory) {
       this.totalInStock += item.numInStock;
+      
     }
-    return this.totalInStock;
+    this.tempWarehouse.currentTotal = this.totalInStock;
+    this.warehouseService.warehouses[this.nameId].currentTotal = this.totalInStock;
+    this.crudService.updateCurrentTotal(this.tempWarehouse, this.nameId + 1)
+    console.log('run currentTotal')
   }
   
 

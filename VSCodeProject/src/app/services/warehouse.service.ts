@@ -7,6 +7,8 @@ import { Warehouse } from '../models/warehouse';
 })
 export class WarehouseService {
 
+  currentTotal: number = 0;
+
   constructor() { }
 
   warehouse: Warehouse = new Warehouse ('', '', 0)
@@ -23,5 +25,7 @@ export class WarehouseService {
     console.log(this.warehouse.warehouseName);
   }
 
+  
+  
 
 }

@@ -6,6 +6,6 @@ public interface WarehouseService {
 	
 	Iterable<Warehouse> findAll();
 	Warehouse findById(int id);
-
+	Warehouse update(Warehouse warehouse);
 
 }

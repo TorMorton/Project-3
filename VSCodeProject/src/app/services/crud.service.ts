@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
+import { Warehouse } from '../models/warehouse';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,13 @@ export class CRUDService {
     return this.httpClient.get<any>(this.tempUrl, {observe: 'response'})
   }
 
+  getCurrentTotal(): Observable<HttpResponse<any>> {
+    this.tempUrl = this.apiUrl + 'warehouses/';
+    console.log("crud tempURL");
+    console.log(this.tempUrl);
+    return this.httpClient.get<any>(this.tempUrl, {observe: 'response'})
+  }
+
   save(object: Product): Observable<HttpResponse<any>> {
     this.tempUrl = this.apiUrl + sessionStorage.getItem("warehouseURL");
     console.log('inside crud save')
@@ -33,6 +41,14 @@ export class CRUDService {
 
   update(object: Product, id: number): Observable<HttpResponse<any>> {
     this.tempUrl = this.apiUrl + sessionStorage.getItem("warehouseURL");
+    console.log('inside crud update')
+    console.log(this.tempUrl);
+    console.log(object);
+    return this.httpClient.put<any>(this.tempUrl + id, object, {observe: 'response'});
+  }
+
+  updateCurrentTotal(object: Warehouse, id: number): Observable<HttpResponse<any>> {
+    this.tempUrl = this.apiUrl + 'warehouses/';
     console.log('inside crud update')
     console.log(this.tempUrl);
     console.log(object);

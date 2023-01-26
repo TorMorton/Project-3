@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.proj3.warehouses.models.Cpu;
 import com.proj3.warehouses.models.Warehouse;
 import com.proj3.warehouses.repositories.WarehouseRepository;
 
@@ -23,6 +24,14 @@ public class WarehouseServiceImpl implements WarehouseService{
 	public Warehouse findById(int id) {
 		Optional<Warehouse> warehouse = repository.findById(id);
 		return warehouse.isPresent() ? warehouse.get() : null;
+	}
+	
+	@Override
+	public Warehouse update(Warehouse warehouse) {
+		if (repository.existsById(warehouse.getId())) {
+			return repository.save(warehouse);
+		}
+		return null;
 	}
 
 }

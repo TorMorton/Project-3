@@ -8,7 +8,7 @@ import { WarehouseService } from '../services/warehouse.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent{
+export class HomeComponent implements OnInit{
 
   gpuWarehouseURL: string = 'gpu_inventory/'
   cpuWarehouseURL: string = 'cpu_inventory/'
@@ -21,10 +21,9 @@ export class HomeComponent{
 
   // Functions
 
-  // ngOnInit(): void {
-  //   this.getAll();
-  //   console.log(this.warehouses)
-  // }
+  ngOnInit(): void {
+    this.getCurrentTotal();
+  }
 
   getWarehouse(warehouseURL: string) {
     sessionStorage.setItem("warehouseURL", warehouseURL);
@@ -33,7 +32,18 @@ export class HomeComponent{
     this.crudService.getAll();
   }
 
-  
+  getCurrentTotal(): void {
+    let counter: number = 0;
+    this.crudService.getCurrentTotal().subscribe(data => {
+      console.log(data.body);
+      for (let warehouse of data.body) {
+          console.log(warehouse.currentTotal);
+          this.warehouseService.warehouses[counter].currentTotal = warehouse.currentTotal;
+      }
+    })
+  }
+
+
   // getAll() {
   //   console.log(this.warehouses);
   //   // console.log('inside getAll() of home.ts')
