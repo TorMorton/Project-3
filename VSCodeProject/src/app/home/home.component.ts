@@ -8,7 +8,7 @@ import { WarehouseService } from '../services/warehouse.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent{
 
   gpuWarehouseURL: string = 'gpu_inventory/'
   cpuWarehouseURL: string = 'cpu_inventory/'
@@ -19,6 +19,12 @@ export class HomeComponent implements OnInit{
   constructor(private crudService: CRUDService, private warehouseService: WarehouseService) {}
   
 
+  // Functions
+
+  // ngOnInit(): void {
+  //   this.getAll();
+  //   console.log(this.warehouses)
+  // }
 
   getWarehouse(warehouseURL: string) {
     sessionStorage.setItem("warehouseURL", warehouseURL);
@@ -28,19 +34,15 @@ export class HomeComponent implements OnInit{
   }
 
   
-  getAll() {
-    sessionStorage.setItem("warehouseURL", "warehouses");
-    this.crudService.getAll().subscribe (data => {
-      console.log(data)
-      this.warehouses = data.body;
+  // getAll() {
+  //   console.log(this.warehouses);
+  //   // console.log('inside getAll() of home.ts')
+  //   // sessionStorage.setItem("warehouseURL", "warehouses");
+  //   // this.crudService.getAll().subscribe (data => {
+  //   //   console.log(data)
+  //   //   this.warehouses = data.body;
 
-    })
+  //   // })
     
-  }
-
-  ngOnInit(): void {
-    this.getAll();
-    console.log(this.warehouses)
-  }
-
+  // }
 }

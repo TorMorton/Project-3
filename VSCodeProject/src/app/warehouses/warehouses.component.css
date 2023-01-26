@@ -25,7 +25,8 @@ main {
 .card {
     background-color: rgba(0, 0, 0, 0.9);
     color: white;
-    width: fit-content;
+    width:min-content;
+    height: max-content;
     margin-bottom: 24px;
 }
 
@@ -39,12 +40,6 @@ main {
 .table thead {
     font-size: 24px;
 }
-
-/* .table #table-tools {
-    display: flex;
-    justify-content: center;
-    align-content: space-between;
-} */
 
 .table #table-tools button {
     margin-left: 12px;

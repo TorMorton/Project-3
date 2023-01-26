@@ -118,16 +118,17 @@
     </div>
   </div>
 
-  <div class="container-fluid bg-black rounded text-white position-relative" style="--bs-bg-opacity: .8; margin-bottom: 12px;">
-    <div class="row gx-3" id="card">
-        <div class="col-sm-8 " id="card-body">
-          <div class="p-3">
-              <h5 class="card-title">{{ warehouses[this.nameId].warehouseName }}</h5>
-              <p class="card-text">Location: {{ warehouses[this.nameId].location }}     Capacity: {{ warehouses[this.nameId].capacity }}    Current Total: {{ warehouses[this.nameId].currentTotal }}</p>
-          </div>
+    <div class="card w-auto">
+         <div class="card-body mx-auto">
+            <h2 class="card-title">{{ warehouses[this.nameId].warehouseName }}</h2>
         </div>
-      </div>              
+        <div class="card-text mx-auto">
+            <span class="px-2"><h5 class="d-inline-block px-1">Location:      </h5> {{ warehouses[this.nameId].location }}    </span>
+            <span class="px-2"><h5 class="d-inline-block px-1">Capacity:      </h5> {{ warehouses[this.nameId].capacity }}    </span>   
+            <span class="px-2"><h5 class="d-inline-block px-1">Current Total: </h5> {{ warehouses[this.nameId].currentTotal }}</span>
+        </div>
     </div>
+
     <!-- ToolBar Buttons -->
     <section class="button-section">
 
@@ -135,22 +136,6 @@
         <div id="button-div">
             <button type="button" class="btn btn-dark" (click)="displayAll()">Display All</button>
         </div>
-
-        <!-- Find and Display by ID
-        <div id="button-div">
-            <div class="col">
-                <div ngbDropdown class="d-inline-block">
-                    <button type="button" class="btn btn-dark" id="Find by ID" ngbDropdownToggle>
-                        Find By ID
-                    </button>
-                    <div ngbDropdownMenu aria-labelledby="Find By ID">
-                        <ng-container *ngFor="let item of inventory">
-                            <button ngbDropdownItem (click)="displayById(item.id)"> {{item.id}} </button>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-        </div> -->
 
         <!-- Add new product -->
         <div id="button-div">
@@ -164,7 +149,7 @@
             </button>
         </div>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-            <div class="card">
+            <div class="card mx-auto">
                 <div class="card-body">
                     <form [formGroup]="productForm" class="productForm">
                         <div>
@@ -219,9 +204,9 @@
                                     <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
                                    </p>
                         </div>
-                          
-                        <button type="button" class="btn btn-primary" style="margin-top: 16px;" (click)="onSubmit(); save(); productForm.reset(); 
-                        collapse.toggle(); displayAll()">Submit</button>
+                            <button type="button" class="btn btn-primary" (click)="onSubmit(); save(); productForm.reset(); collapse.toggle(); displayAll()">
+                                        Submit
+                            </button>
                     </form>
                 </div>
             </div>
