@@ -35,24 +35,11 @@ export class HomeComponent implements OnInit{
   getCurrentTotal(): void {
     let counter: number = 0;
     this.crudService.getCurrentTotal().subscribe(data => {
-      console.log(data.body);
-      for (let warehouse of data.body) {
-          console.log(warehouse.currentTotal);
-          this.warehouseService.warehouses[counter].currentTotal = warehouse.currentTotal;
+      console.log(data);
+      for (let item of data.body) {
+          this.warehouseService.warehouses[counter].currentTotal = item.currentTotal;
+          counter++;
       }
     })
   }
-
-
-  // getAll() {
-  //   console.log(this.warehouses);
-  //   // console.log('inside getAll() of home.ts')
-  //   // sessionStorage.setItem("warehouseURL", "warehouses");
-  //   // this.crudService.getAll().subscribe (data => {
-  //   //   console.log(data)
-  //   //   this.warehouses = data.body;
-
-  //   // })
-    
-  // }
 }
