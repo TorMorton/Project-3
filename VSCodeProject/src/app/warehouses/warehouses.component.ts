@@ -28,10 +28,6 @@ export class WarehousesComponent implements OnInit{
   // constructor
 
   constructor(private crudService: CRUDService, private productService: ProductService, private warehouseService: WarehouseService, private fb: FormBuilder,) {
-  //   this.crudService.getAll().subscribe(data => {
-  //     console.log(data);
-  //     this.inventory = data.body
-  // })
   }
 
 
@@ -41,7 +37,7 @@ export class WarehousesComponent implements OnInit{
       manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       price: [0, Validators.compose([Validators.required])],
-      numInStock: [1, Validators.compose([Validators.required, Validators.max(this.limit)])]
+      numInStock: [1, Validators.compose([Validators.required, Validators.max(this.setCurrentLimit())])]
     }
   );
 
@@ -140,17 +136,18 @@ export class WarehousesComponent implements OnInit{
   }
 
   save() {
+    if (this.checkCapacity()){
     this.countCurrentTotal();
     this.crudService.save(this.tempProduct).subscribe(data => {
       console.log(data);
       this.displayAll();
-      
-    });
+     });
+    }
   }
   
   update() {
     console.log('inside warehouse update()')
-    if(this.tempProduct.numInStock + this.totalInStock <= this.warehouseService.warehouses[this.nameId].capacity ){
+    if(this.checkCapacity()){
       this.crudService.update(this.tempProduct, this.tempProduct.id).subscribe(data => {
         console.log(data);
         this.displayAll();
@@ -184,6 +181,19 @@ export class WarehousesComponent implements OnInit{
     this.tempWarehouse.currentTotal = this.totalInStock;
     this.crudService.updateCurrentTotal(this.tempWarehouse, this.nameId + 1).subscribe(data => {
       console.log(data)
+      console.log(this.totalInStock);
     })
   }
+
+  checkCapacity(): boolean {
+    if(this.tempProduct.numInStock + this.totalInStock <= this.warehouseService.warehouses[this.nameId].capacity ) {
+    return true;
+  } else {
+    return false;
+  }
+ }
+
+ setCurrentLimit(): number {
+  return 100 - this.totalInStock;
+ }
 }
