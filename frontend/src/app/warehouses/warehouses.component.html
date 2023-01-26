@@ -1,0 +1,309 @@
+<main>
+
+  <!-- Edit Modal -->
+  <div class="modal fade" id="edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Product</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body mx-auto">
+            <form [formGroup]="productForm" class="editForm">
+                <div>
+                    <label for="manufacturer">Manufacturer</label>
+                    <input type="text" 
+                        formControlName="manufacturer" 
+                        class="formField" 
+                        name="manufacturer" 
+                        id="manufacturer" 
+                        placeholder="Enter manufacturer...">  
+                        <p class="invalid" *ngIf="manufacturer!.invalid && (manufacturer!.touched || manufacturer!.dirty)">
+                            <span *ngIf="manufacturer!.errors?.['required']">Manufacturer is required!</span>
+                            <span *ngIf="manufacturer!.errors?.['maxLength']">Manufacturer cannot be longer than 50 characters!</span>
+                        </p>    
+                </div>                 
+                <div>
+                    <label for="model">Model</label>
+                    <input type="text" 
+                        formControlName="model" 
+                        class="formField" 
+                        name="model" 
+                        id="model" 
+                        placeholder="Enter model...">
+                        <p class="invalid" *ngIf="model!.invalid && (model!.touched || model!.dirty)">
+                            <span *ngIf="model!.errors?.['required']">Model is required!</span>
+                            <span *ngIf="model!.errors?.['maxLength']">Model cannot be longer than 50 characters!</span>
+                        </p>
+                </div>
+
+                <div>
+                    <label for="price">Price</label>
+                    <input type="number" min="0"
+                           formControlName="price" 
+                           class="formField" 
+                           name="price" 
+                           id="price" 
+                           placeholder="Enter price...">
+                           <p class="invalid" *ngIf="price!.invalid && (price!.touched || price!.dirty)">
+                            <span *ngIf="price!.errors?.['required']">Price is required!</span>
+                           </p>
+                </div>
+
+                <div>
+                    <label for="numInStock">Number in Stock</label>
+                    <input type="number" min="1"
+                           formControlName="numInStock" 
+                           class="formField" 
+                           name="numInStock" 
+                           id="numInStock" 
+                           placeholder="Enter price...">
+                           <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
+                            <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
+                           </p>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button type="button"  class="btn btn-primary" (click)="onSubmit(); update(); productForm.reset(); displayAll()"  data-bs-dismiss="modal" [disabled]="productForm.invalid">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DeleteById modal -->
+  <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Product</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p> Are you sure you wish to delete? </p>
+                <p> {{ tempProduct.manufacturer }} </p>
+                <p> {{ tempProduct.model }} </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 
+            Cancel
+          </button>
+          <button type="button" class="btn btn-danger" (click)="deleteById()" data-bs-dismiss="modal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete All modal -->
+  <div class="modal fade" id="deleteAll-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Product</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p> Are you sure you wish to clear the warehouse? </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button type="button" class="btn btn-danger" (click)="deleteAll();" data-bs-dismiss="modal">Clear Warehouse</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="card w-auto">
+         <div class="card-body mx-auto">
+            <h2 class="card-title">{{ warehouses[this.nameId].warehouseName }}</h2>
+        </div>
+        <div class="card-text mx-auto">
+            <span class="px-2"><h5 class="d-inline-block px-1">Location:      </h5> {{ warehouses[this.nameId].location }}    </span>
+            <span class="px-2"><h5 class="d-inline-block px-1">Capacity:      </h5> {{ warehouses[this.nameId].capacity }}    </span>   
+            <span class="px-2"><h5 class="d-inline-block px-1">Current Total: </h5> {{ this.totalInStock }}</span>
+        </div>
+    </div>
+
+    <!-- ToolBar Buttons -->
+    <section class="button-section">
+
+        <!-- Display All -->
+        <div id="button-div">
+            <button type="button" class="btn btn-dark" (click)="displayAll()">Display All</button>
+        </div>
+
+        <!-- Add new product -->
+        <div id="button-div">
+            <button
+                type="button"
+                class="btn btn-dark"
+                (click)="collapse.toggle()"
+                [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapseExample" (click)="productForm.reset()">
+                Add Product
+            </button>
+        </div>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <div class="card mx-auto">
+                <div class="card-body">
+                    <form [formGroup]="productForm" class="productForm">
+                        <div>
+                            <label for="manufacturer">Manufacturer</label>
+                            <input type="text" 
+                                formControlName="manufacturer" 
+                                class="formField" 
+                                name="manufacturer" 
+                                id="manufacturer" 
+                                placeholder="Enter manufacturer...">  
+                                <p class="invalid" *ngIf="manufacturer!.invalid && (manufacturer!.touched || manufacturer!.dirty)">
+                                    <span *ngIf="manufacturer!.errors?.['required']">Manufacturer is required!</span>
+                                    <span *ngIf="manufacturer!.errors?.['maxLength']">Cannot be longer than 50 characters!</span>
+                                </p>    
+                        </div>                 
+                        <div>
+                            <label for="model">Model</label>
+                            <input type="text" 
+                                formControlName="model" 
+                                class="formField" 
+                                name="model" 
+                                id="model" 
+                                placeholder="Enter model...">
+                                <p class="invalid" *ngIf="model!.invalid && (model!.touched || model!.dirty)">
+                                    <span *ngIf="model!.errors?.['required']">Model is required!</span>
+                                    <span *ngIf="model!.errors?.['maxLength']">Model cannot be longer than 50 characters!</span>
+                                </p>
+                        </div>
+        
+                        <div>
+                            <label for="price">Price</label>
+                            <input type="number" min="0"
+                                   formControlName="price" 
+                                   class="formField" 
+                                   name="price" 
+                                   id="price" 
+                                   placeholder="Enter price...">
+                                   <p class="invalid" *ngIf="price!.invalid && (price!.touched || price!.dirty)">
+                                    <span *ngIf="price!.errors?.['required']">Price is required!</span>
+                                   </p>
+                        </div>
+
+                        <div>
+                            <label for="numInStock">Number in Stock</label>
+                            <input type="number" min="1"
+                                   formControlName="numInStock" 
+                                   class="formField" 
+                                   name="numInStock" 
+                                   id="numInStock" 
+                                   placeholder="Enter number in stock...">
+                                   <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
+                                    <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
+                                   </p>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="onSubmit(); save(); productForm.reset(); collapse.toggle(); displayAll()">
+                                        Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>  
+
+
+    <!-- ----------------- Tables ------------------ -->
+    
+    <div class="container-fluid">
+        <div class="button-div">
+            <ng-container *ngIf="inventory && !tempInventory">
+                <table class="table rounded">
+                    <thead>
+                        <tr>
+                            <th scope="col">Manufacturer</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Cost</th>
+                            <th scope="col"># in Stock</th>
+                            <th scope="col">Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of inventory">
+                            <tr>
+                                <td> {{ item.manufacturer }}</td>
+                                <td> {{ item.model }} </td>
+                                <td> {{ item.cost }} </td>
+                                <td> {{ item.numInStock }} </td>
+                                <td id="table-tools"> 
+                                    <!-- Button trigger edit modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
+                                    (click)="findById(item.id)">
+                                        Edit
+                                    </button>
+                                    <!-- Button trigger delete modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" 
+                                    (click)="findById(item.id)">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr> 
+                         </ng-container>
+                    </tbody>
+                  </table>
+    
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div>
+            <ng-container *ngIf="tempInventory">
+                <table class="table rounded">
+                    <thead>
+                        <tr>
+                            <th scope="col">Manufacturer</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Cost</th>
+                            <th scope="col"># in Stock</th>
+                            <th scope="col">Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of tempInventory">
+                            <tr>
+                                <td> {{ item.manufacturer }}</td>
+                                <td> {{ item.model }} </td>
+                                <td> {{ item.cost }} </td>
+                                <td> {{ item.numInStock }} </td>
+                                <td id="table-tools"> 
+                                    <!-- Button trigger edit modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
+                                    (click)="findById(item.id)">
+                                        Edit
+                                    </button>
+                                    <!-- Button trigger deleteById modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" 
+                                    (click)="findById(item.id)">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr> 
+                         </ng-container>
+                    </tbody>
+                  </table>
+    
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- Delete All -->
+        <!-- Button trigger deleteAll modal -->
+        <div class="container-fluid">
+            <button type="button" class="btn btn-danger float-end" data-bs-toggle="modal" data-bs-target="#deleteAll-modal">
+                Clear Warehouse
+            </button>
+        </div>
+</main>

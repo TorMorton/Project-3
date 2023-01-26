@@ -1,0 +1,61 @@
+<main>
+
+    <h2> Warehouses </h2>
+
+    <!-- <section class="warehouse-cards"> -->
+
+        <div class="container-fluid bg-black rounded text-white" style="--bs-bg-opacity: .8; margin-bottom: 12px;">
+            <div class="row gx-3 " id="card">
+                <div class="col-sm-4">
+                    <div class="p-3"><img src="../../assets/Images/warehouse-1.jpg" class="rounded img-fluid" alt="Aerial view of the gpu warehouse"></div>
+                </div>
+                <div class="col-sm-8" id="card-body">
+                  <div class="p-3">
+                      <h5 class="card-title">{{ warehouses[0].warehouseName }}</h5>
+                      <p class="card-text">Location: {{ warehouses[0].location }}</p>
+                      <p class="card-text">Capacity: {{ warehouses[0].capacity }}</p>
+                      <p class="card-text">Current Total: {{ warehouses[0].currentTotal }}</p>
+                      <div class="float-end"><button type="button" class="btn btn-dark btn-outline-light btn-sm" routerLink="/warehouses" (click)="getWarehouse(gpuWarehouseURL)">GPU Warehouse</button></div>
+                  </div>
+                </div>
+              </div>              
+        </div>
+
+        <div class="container-fluid bg-black rounded text-white" style="--bs-bg-opacity: .8; margin-bottom: 12px;">
+            <div class="row gx-3" id="card">
+                <div class="col-sm-4">
+                    <div class="p-3"><img src="../../assets/Images/warehouse-2.jpg" class="rounded img-fluid" alt="Aerial view of the gpu warehouse"></div>
+                </div>
+                <div class="col-sm-8" id="card-body">
+                  <div class="p-3">
+                      <h5 class="card-title">{{ warehouses[1].warehouseName }}</h5>
+                      <p class="card-text">Location: {{ warehouses[1].location }}</p>
+                      <p class="card-text">Capacity: {{ warehouses[1].capacity }}</p>
+                      <p class="card-text">CurrentTotal: {{ warehouses[1].currentTotal }}</p>
+                      <div class="float-end"><button type="button" class="btn btn-dark btn-outline-light btn-sm" routerLink="/warehouses" (click)="getWarehouse(cpuWarehouseURL)">CPU Warehouse</button></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <div class="container-fluid bg-black rounded text-white" style="--bs-bg-opacity: .8; margin-bottom: 12px;">
+            <div class="row gx-3 " id="card">
+                <div class="col-sm-4">
+                    <div class="p-3"><img src="../../assets/Images/warehouse-3.jpg" class="rounded img-fluid" alt="Aerial view of the gpu warehouse"></div>
+                </div>
+                <div class="col-sm-8" id="card-body">
+                    <div class="p-3">
+                        <h5 class="card-title">{{ warehouses[2].warehouseName }}</h5>
+                        <p class="card-text">Location: {{ warehouses[2].location }}</p>
+                        <p class="card-text">Capacity: {{ warehouses[2].capacity }}</p>
+                        <p class="card-text">CurrentTotal: {{ warehouses[2].currentTotal }}</p>
+                        <div class="float-end"><button type="button" class="btn btn-dark btn-outline-light btn-sm" routerLink="/warehouses" (click)="getWarehouse(psuWarehouseURL)">PSU Warehouse</button></div>
+                    </div>
+                </div>
+              </div>
+        </div>
+
+    <!-- </section> -->
+
+
+</main> 

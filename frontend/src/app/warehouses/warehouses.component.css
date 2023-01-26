@@ -1,0 +1,52 @@
+main {
+    margin: 0px 24px;
+}
+
+#button-div {
+    display: inline-block;
+    padding: 6px;
+}
+
+.productForm div {
+   padding:6px; 
+}
+
+.productForm div label, .editForm label {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+
+.productForm span, .editForm span {
+    color: red;
+    font-weight: bold;
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    width:min-content;
+    height: max-content;
+    margin-bottom: 24px;
+}
+
+.table {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.table thead {
+    font-size: 24px;
+}
+
+.table #table-tools button {
+    margin-left: 12px;
+}
+
+#delete-modal .modal-body p {
+    display: block;
+    text-align: center;
+}
+

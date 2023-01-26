@@ -1,0 +1,16 @@
+<ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-left">
+	<li [ngbNavItem]="1">
+		<a ngbNavLink routerLink="/home">Home</a>
+	</li>
+
+	<li ngbDropdown class="nav-item">
+		<a href (click)="false" class="nav-link" ngbDropdownToggle>Warehouses</a>
+		<div ngbDropdownMenu>
+			<button ngbDropdownItem routerLink="/warehouses" routerLinkActive="active-link" (click)="getWarehouse(gpuWarehouseURL, gpuWarehouse); refresh()">GPU Warehouse</button>
+			<button ngbDropdownItem routerLink="/warehouses" routerLinkActive="active-link" (click)="getWarehouse(cpuWarehouseURL, cpuWarehouse); refresh()">CPU Warehouse</button>
+			<button ngbDropdownItem routerLink="/warehouses" routerLinkActive="active-link" (click)="getWarehouse(psuWarehouseURL, psuWarehouse); refresh()">PSU Warehouse</button>
+		</div>
+	</li>
+</ul>
+
+<router-outlet></router-outlet>
