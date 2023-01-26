@@ -11,13 +11,13 @@ main {
    padding:6px; 
 }
 
-.productForm div label {
+.productForm div label, .editForm label {
     display: block;
     font-weight: bold;
     text-align: center;
 }
 
-.productForm span {
+.productForm span, .editForm span {
     color: red;
     font-weight: bold;
 }

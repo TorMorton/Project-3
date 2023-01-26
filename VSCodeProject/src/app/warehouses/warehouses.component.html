@@ -8,8 +8,8 @@
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Product</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-            <form [formGroup]="productForm" class="productForm">
+        <div class="modal-body mx-auto">
+            <form [formGroup]="productForm" class="editForm">
                 <div>
                     <label for="manufacturer">Manufacturer</label>
                     <input type="text" 
@@ -204,9 +204,9 @@
                                     <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
                                    </p>
                         </div>
-                            <button type="button" class="btn btn-primary" (click)="onSubmit(); save(); productForm.reset(); collapse.toggle(); displayAll()">
+                        <button type="button" class="btn btn-primary" (click)="onSubmit(); save(); productForm.reset(); collapse.toggle(); displayAll()">
                                         Submit
-                            </button>
+                        </button>
                     </form>
                 </div>
             </div>
