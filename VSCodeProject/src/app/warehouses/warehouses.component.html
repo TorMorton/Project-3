@@ -1,6 +1,6 @@
 <main>
 
-  <!-- Edit Modal -->
+ <!-- Edit Modal 
   <div class="modal fade" id="edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -8,7 +8,7 @@
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Product</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" mx-auto>
             <form [formGroup]="productForm" class="productForm">
                 <div>
                     <label for="manufacturer">Manufacturer</label>
@@ -20,7 +20,7 @@
                         placeholder="Enter manufacturer...">  
                         <p class="invalid" *ngIf="manufacturer!.invalid && (manufacturer!.touched || manufacturer!.dirty)">
                             <span *ngIf="manufacturer!.errors?.['required']">Manufacturer is required!</span>
-                            <span *ngIf="manufacturer!.errors?.['maxLenght']">Manufacturer cannot be longer than 50 characters!</span>
+                            <span *ngIf="manufacturer!.errors?.['maxLength']">Manufacturer cannot be longer than 50 characters!</span>
                         </p>    
                 </div>                 
                 <div>
@@ -33,7 +33,7 @@
                         placeholder="Enter model...">
                         <p class="invalid" *ngIf="model!.invalid && (model!.touched || model!.dirty)">
                             <span *ngIf="model!.errors?.['required']">Model is required!</span>
-                            <span *ngIf="model!.errors?.['maxLenght']">Model cannot be longer than 50 characters!</span>
+                            <span *ngIf="model!.errors?.['maxLength']">Model cannot be longer than 50 characters!</span>
                         </p>
                 </div>
 
@@ -47,7 +47,19 @@
                            placeholder="Enter price...">
                            <p class="invalid" *ngIf="price!.invalid && (price!.touched || price!.dirty)">
                             <span *ngIf="price!.errors?.['required']">Price is required!</span>
-                            <span *ngIf="price!.errors?.['maxLenght']">Price cannot be less than 0</span>
+                           </p>
+                </div>
+
+                <div>
+                    <label for="numInStock">Number in Stock</label>
+                    <input type="number" min="1"
+                           formControlName="numInStock" 
+                           class="formField" 
+                           name="numInStock" 
+                           id="numInStock" 
+                           placeholder="Enter price...">
+                           <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
+                            <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
                            </p>
                 </div>
               </form>
@@ -61,6 +73,7 @@
       </div>
     </div>
   </div>
+  -->
 
   <!-- DeleteById modal -->
   <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -106,28 +119,23 @@
     </div>
   </div>
 
+    <div class="card w-auto">
+         <div class="card-body mx-auto">
+            <h2 class="card-title">{{ warehouses[this.nameId].warehouseName }}</h2>
+        </div>
+        <div class="card-text mx-auto">
+            <span class="px-2"><h5 class="d-inline-block px-1">Location:      </h5> {{ warehouses[this.nameId].location }}    </span>
+            <span class="px-2"><h5 class="d-inline-block px-1">Capacity:      </h5> {{ warehouses[this.nameId].capacity }}    </span>   
+            <span class="px-2"><h5 class="d-inline-block px-1">Current Total: </h5> {{ this.totalInStock }}</span>
+        </div>
+    </div>
+
     <!-- ToolBar Buttons -->
     <section class="button-section">
 
         <!-- Display All -->
         <div id="button-div">
             <button type="button" class="btn btn-dark" (click)="displayAll()">Display All</button>
-        </div>
-
-        <!-- Find and Display by ID -->
-        <div id="button-div">
-            <div class="col">
-                <div ngbDropdown class="d-inline-block">
-                    <button type="button" class="btn btn-dark" id="Find by ID" ngbDropdownToggle>
-                        Find By ID
-                    </button>
-                    <div ngbDropdownMenu aria-labelledby="Find By ID">
-                        <ng-container *ngFor="let item of inventory">
-                            <button ngbDropdownItem (click)="displayById(item.id)"> {{item.id}} </button>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Add new product -->
@@ -142,7 +150,7 @@
             </button>
         </div>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-            <div class="card">
+            <div class="card mx-auto">
                 <div class="card-body">
                     <form [formGroup]="productForm" class="productForm">
                         <div>
@@ -155,7 +163,7 @@
                                 placeholder="Enter manufacturer...">  
                                 <p class="invalid" *ngIf="manufacturer!.invalid && (manufacturer!.touched || manufacturer!.dirty)">
                                     <span *ngIf="manufacturer!.errors?.['required']">Manufacturer is required!</span>
-                                    <span *ngIf="manufacturer!.errors?.['maxLenght']">Cannot be longer than 50 characters!</span>
+                                    <span *ngIf="manufacturer!.errors?.['maxLength']">Cannot be longer than 50 characters!</span>
                                 </p>    
                         </div>                 
                         <div>
@@ -168,7 +176,7 @@
                                 placeholder="Enter model...">
                                 <p class="invalid" *ngIf="model!.invalid && (model!.touched || model!.dirty)">
                                     <span *ngIf="model!.errors?.['required']">Model is required!</span>
-                                    <span *ngIf="model!.errors?.['maxLenght']">Model cannot be longer than 50 characters!</span>
+                                    <span *ngIf="model!.errors?.['maxLength']">Model cannot be longer than 50 characters!</span>
                                 </p>
                         </div>
         
@@ -182,12 +190,23 @@
                                    placeholder="Enter price...">
                                    <p class="invalid" *ngIf="price!.invalid && (price!.touched || price!.dirty)">
                                     <span *ngIf="price!.errors?.['required']">Price is required!</span>
-                                    <span *ngIf="price!.errors?.['maxLenght']">Price cannot be less than 0</span>
                                    </p>
                         </div>
-                          
-                        <button type="button" class="btn btn-primary" style="margin-top: 16px;" (click)="onSubmit(); save(); productForm.reset(); 
-                        collapse.toggle(); displayAll()">Submit</button>
+
+                        <div>
+                            <label for="numInStock">Number in Stock</label>
+                            <input type="number" min="1"
+                                   formControlName="numInStock" 
+                                   class="formField" 
+                                   name="numInStock" 
+                                   id="numInStock" 
+                                   placeholder="Enter number in stock...">
+                                   <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
+                                    <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
+                                    <span *ngIf="model!.errors?.['max']">Not enough space in warehouse</span>
+                                   </p>
+                        </div>
+                        <button type="button"  class="btn btn-primary" (click)="onSubmit(); save(); productForm.reset(); collapse.toggle(); displayAll()"  data-bs-dismiss="modal" [disabled]="productForm.invalid">Submit</button>
                     </form>
                 </div>
             </div>
@@ -197,37 +216,68 @@
 
 
     <!-- ----------------- Tables ------------------ -->
+    
     <div class="container-fluid">
         <div class="button-div">
             <ng-container *ngIf="inventory && !tempInventory">
                 <table class="table rounded">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Manufacturer</th>
                             <th scope="col">Model</th>
                             <th scope="col">Cost</th>
+                            <th scope="col"># in Stock</th>
                             <th scope="col">Tools</th>
                         </tr>
                     </thead>
                     <tbody>
                         <ng-container *ngFor="let item of inventory">
                             <tr>
-                                <th scope="row"> {{ item.id }} </th>
-                                <td> {{ item.manufacturer }}</td>
-                                <td> {{ item.model }} </td>
-                                <td> {{ item.cost }} </td>
-                                <td id="table-tools"> 
-                                    <!-- Button trigger edit modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
-                                    (click)="findById(item.id)">
-                                        Edit
-                                    </button>
-                                    <!-- Button trigger delete modal -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" 
-                                    (click)="findById(item.id)">
-                                        Delete
-                                    </button>
+                                <td>
+                                    <div *ngIf="!item.isEdit">
+                                        {{ item.manufacturer }}
+                                    </div>
+                                    <div *ngIf="item.isEdit">
+                                        <input placeholder="{{ item.manufacturer }}" type="text" [(ngModel)]="item.manufacturer" class="form-control"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div *ngIf="!item.isEdit">
+                                        {{ item.model }}
+                                    </div>
+                                    <div *ngIf="item.isEdit">
+                                        <input placeholder="{{ item.model }}" type="text" [(ngModel)]="item.model" class="form-control"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div *ngIf="!item.isEdit">
+                                        {{ item.cost }}
+                                    </div>
+                                    <div *ngIf="item.isEdit">
+                                        <input placeholder="{{ item.cost }}" type="text" [(ngModel)]="item.cost" class="form-control"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div *ngIf="!item.isEdit">
+                                        {{ item.numInStock }}
+                                    </div>
+                                    <div *ngIf="item.isEdit">
+                                        <input placeholder="{{ item.numInStock }}" type="text" [(ngModel)]="item.numInStock" class="form-control"/>
+                                    </div>
+                                </td>
+                                <td id="table-tools">
+                                    <section *ngIf="item.isEdit">
+                                        <button (click)="updateProduct(item)" class="btn btn-primary">Update</button>
+                                        <button (click)="item.isEdit = false" class="btn btn-danger">Cancel</button>
+                                    </section>
+                                    <section *ngIf="!item.isEdit">
+                                        <button (click)="onEdit(item)" class="btn btn-primary">Edit</button>
+                                        <!-- Button trigger delete modal -->
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" 
+                                        (click)="findById(item.id)">
+                                            Delete
+                                        </button>
+                                    </section>
                                 </td>
                             </tr> 
                          </ng-container>
@@ -244,20 +294,20 @@
                 <table class="table rounded">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Manufacturer</th>
                             <th scope="col">Model</th>
                             <th scope="col">Cost</th>
+                            <th scope="col"># in Stock</th>
                             <th scope="col">Tools</th>
                         </tr>
                     </thead>
                     <tbody>
                         <ng-container *ngFor="let item of tempInventory">
                             <tr>
-                                <th scope="row"> {{ item.id }} </th>
                                 <td> {{ item.manufacturer }}</td>
                                 <td> {{ item.model }} </td>
                                 <td> {{ item.cost }} </td>
+                                <td> {{ item.numInStock }} </td>
                                 <td id="table-tools"> 
                                     <!-- Button trigger edit modal -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" 
