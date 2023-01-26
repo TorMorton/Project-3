@@ -6,6 +6,7 @@ import { ProductService } from '../services/product.service';
 import { Observable } from 'rxjs';
 import { WarehouseService } from '../services/warehouse.service';
 import { Warehouse } from '../models/warehouse';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-warehouses',
@@ -19,6 +20,7 @@ export class WarehousesComponent implements OnInit{
   inventory: any = [];
   tempInventory: any;
   totalInStock: number = 0;
+  limit = 100 - this.totalInStock;
   warehouses: Warehouse[] = this.warehouseService.warehouses;
   nameId: number = 0;
 
@@ -39,7 +41,7 @@ export class WarehousesComponent implements OnInit{
       manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       price: [0, Validators.compose([Validators.required])],
-      numInStock: [1, Validators.compose([Validators.required])]
+      numInStock: [1, Validators.compose([Validators.required, Validators.max(this.limit)])]
     }
   );
 
@@ -67,7 +69,7 @@ export class WarehousesComponent implements OnInit{
   };
 
   tempWarehouse: any = {
-    warehouseName: this.warehouseService.warehouses[this.nameId].warehouseName,
+    name: this.warehouseService.warehouses[this.nameId].warehouseName,
     location: this.warehouseService.warehouses[this.nameId].location,
     capacity: 100,
     currentTotal: 0
@@ -148,10 +150,12 @@ export class WarehousesComponent implements OnInit{
   
   update() {
     console.log('inside warehouse update()')
-    this.crudService.update(this.tempProduct, this.tempProduct.id).subscribe(data => {
-      console.log(data);
-      this.displayAll();
-    });
+    if(this.tempProduct.numInStock + this.totalInStock <= this.warehouseService.warehouses[this.nameId].capacity ){
+      this.crudService.update(this.tempProduct, this.tempProduct.id).subscribe(data => {
+        console.log(data);
+        this.displayAll();
+      });
+    }
   }
 
   deleteById() {
@@ -178,16 +182,8 @@ export class WarehousesComponent implements OnInit{
       this.totalInStock += item.numInStock;
     }
     this.tempWarehouse.currentTotal = this.totalInStock;
-    // this.warehouseService.warehouses[this.nameId].currentTotal = this.totalInStock;
     this.crudService.updateCurrentTotal(this.tempWarehouse, this.nameId + 1).subscribe(data => {
       console.log(data)
     })
   }
-  
-
-
-  
-
-
-
 }

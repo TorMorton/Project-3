@@ -202,11 +202,10 @@
                                    placeholder="Enter number in stock...">
                                    <p class="invalid" *ngIf="numInStock!.invalid && (numInStock!.touched || numInStock!.dirty)">
                                     <span *ngIf="numInStock!.errors?.['required']">Number in stock is required!</span>
+                                    <span *ngIf="model!.errors?.['max']">Not enough space in warehouse</span>
                                    </p>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="onSubmit(); save(); productForm.reset(); collapse.toggle(); displayAll()">
-                                        Submit
-                        </button>
+                        <button type="button"  class="btn btn-primary" (click)="onSubmit(); save(); productForm.reset(); collapse.toggle(); displayAll()"  data-bs-dismiss="modal" [disabled]="productForm.invalid">Submit</button>
                     </form>
                 </div>
             </div>
