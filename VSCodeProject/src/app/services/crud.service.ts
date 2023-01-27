@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
 import { Warehouse } from '../models/warehouse';

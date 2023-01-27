@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
 import { Warehouse } from '../models/warehouse';
 
 @Injectable({
@@ -20,7 +19,6 @@ export class WarehouseService {
   ]
 
   createWarehouse(newWarehouse: Warehouse) {
-    console.log('inside WarehouseService');
     this.warehouse = newWarehouse;
     console.log(this.warehouse.warehouseName);
   }

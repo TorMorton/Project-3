@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Product } from '../models/product';
 import { CRUDService } from '../services/crud.service';
 import { ProductService } from '../services/product.service';
-import { Observable } from 'rxjs';
 import { WarehouseService } from '../services/warehouse.service';
 import { Warehouse } from '../models/warehouse';
-import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-warehouses',
@@ -44,7 +42,7 @@ export class WarehousesComponent implements OnInit{
     {
       manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
       model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
-      price: [0, Validators.compose([Validators.required])],
+      cost: [0, Validators.compose([Validators.required])],
       numInStock: [1, Validators.compose([Validators.required, Validators.max(100 - this.tempWarehouse.currentTotal)])]
     }
   );
@@ -57,8 +55,8 @@ export class WarehousesComponent implements OnInit{
     return this.productForm.get('model');
   }
 
-  get price() {
-    return this.productForm.get('price');
+  get cost() {
+    return this.productForm.get('cost');
   }
 
   get numInStock() {
@@ -131,7 +129,7 @@ export class WarehousesComponent implements OnInit{
   onSubmit(): void {
     this.productService.createProduct(new Product(this.manufacturer?.value!, 
                                                   this.model?.value!, 
-                                                  this.price?.value!,
+                                                  this.cost?.value!,
                                                   this.numInStock?.value!));
     this.tempProduct.manufacturer = this.productService.product.manufacturer;
     this.tempProduct.model = this.productService.product.model;
@@ -141,16 +139,15 @@ export class WarehousesComponent implements OnInit{
 
   save() {
     if (this.checkCapacity()){
-    this.countCurrentTotal();
-    this.crudService.save(this.tempProduct).subscribe(data => {
-      console.log(data);
-      this.displayAll();
-     });
+      this.countCurrentTotal();
+      this.crudService.save(this.tempProduct).subscribe(data => {
+        console.log(data);
+        this.displayAll();
+      });
     }
   }
   
   update() {
-    console.log('inside warehouse update()')
     if(this.checkCapacity()){
       this.crudService.update(this.tempProduct, this.tempProduct.id).subscribe(data => {
         console.log(data);
@@ -160,7 +157,6 @@ export class WarehousesComponent implements OnInit{
   }
 
   deleteById() {
-      console.log('inside warehouse deleteById()')
       this.crudService.deleteById(this.tempProduct.id).subscribe(async data => {
       console.log(data);
       this.displayAll();
@@ -177,7 +173,6 @@ export class WarehousesComponent implements OnInit{
   }
 
   countCurrentTotal(): void {
-    console.log('run currentTotal')
     this.totalInStock = 0;
     for (let item of this.inventory) {
       this.totalInStock += item.numInStock;
@@ -192,7 +187,7 @@ export class WarehousesComponent implements OnInit{
       {
         manufacturer: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
         model: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
-        price: [0, Validators.compose([Validators.required])],
+        cost: [0, Validators.compose([Validators.required])],
         numInStock: [1, Validators.compose([Validators.required, Validators.max(100 - this.tempWarehouse.currentTotal)])]
       }
     );
@@ -211,7 +206,7 @@ export class WarehousesComponent implements OnInit{
     {
       manufacturer: [this.tempProduct.manufacturer, Validators.compose([Validators.maxLength(50), Validators.required])],
       model: [this.tempProduct.model, Validators.compose([Validators.maxLength(50), Validators.required])],
-      price: [this.tempProduct.price, Validators.compose([Validators.required])],
+      cost: [this.tempProduct.cost, Validators.compose([Validators.required])],
       numInStock: [this.tempProduct.numInStock, Validators.compose([Validators.required, Validators.max(100 - (this.tempWarehouse.currentTotal - this.tempProduct.numInStock))])]
     }
   );
