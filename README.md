@@ -35,7 +35,6 @@
     <li>
         Create an application.properties with the following properties:
     </li>
-    
     <ol>
         <li>
             spring.datasource.url=jdbc:mysql://localhost:3306/cpu_warehouse
