@@ -26,3 +26,32 @@
     <li>Add internationalization support (i.e. i18n or ngq-translate</li>
     <li>Deploy using AWS</li>
 </ul>
+
+<h4>To connect to MySQL in Spring Boot:</h4>
+<ul>
+    <li>
+        Create a folder named resources /src/main/
+    </li>
+    <li>
+        Create an application.properties with the following properties:
+    </li>
+    <ol>
+        <li>
+            spring.datasource.url=jdbc:mysql://localhost:3306/cpu_warehouse
+        </li>
+        <li>
+            spring.datasource.username=root
+        </li>
+        <li>
+            spring.datasource.password= (your pwd goes here)
+        </li>
+        <li>
+            spring.jpa.hibernate.ddl-auto=update
+        </li>
+        <li>
+            spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+        </li>
+    </ol>
+</ul>
+
+
