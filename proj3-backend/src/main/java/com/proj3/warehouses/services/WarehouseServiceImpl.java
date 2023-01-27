@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.proj3.warehouses.models.Cpu;
 import com.proj3.warehouses.models.Warehouse;
 import com.proj3.warehouses.repositories.WarehouseRepository;
 

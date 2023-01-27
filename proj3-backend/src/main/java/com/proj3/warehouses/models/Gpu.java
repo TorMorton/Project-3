@@ -1,7 +1,5 @@
 package com.proj3.warehouses.models;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 
 import org.hibernate.annotations.DynamicInsert;
